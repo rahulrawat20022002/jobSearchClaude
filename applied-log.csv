@@ -122,7 +122,7 @@ date,company,role,location,source,status,draft_path
 8/9/26,WISAG Airport Service Holding AG,"Werkstudent, Data Scientist am Flughafen Muenchen",Muenchen,StepStone,applied,drafts/WISAG Muenchen Werkstudent Data Scientist Aviation/
 8/11/26,1&1 Versatel GmbH,"Werkstudent, Data Science und AI",Duesseldorf,StepStone,Not listed Anymore,drafts/1und1 Versatel Duesseldorf Werkstudent Data Science AI/
 8/11/26,SCHOTT AG,"Werkstudent, Data Science Machine Learning und AI",Mainz,StepStone,applied,drafts/SCHOTT AG Mainz Werkstudent Data Science Machine Learning AI/
-8/11/26,HDI AG,"Werkstudent, Data Engineering und Analytics im Aktuariat",Hannover,StepStone,Not listed Anymore,drafts/HDI AG Hannover Werkstudent Data Engineering Analytics Aktuariat/
+8/11/26,HDI AG,"Werkstudent, Data Engineering und Analytics im Aktuariat",Hannover,StepStone,applied,drafts/HDI AG Hannover Werkstudent Data Engineering Analytics Aktuariat/
 8/12/26,Commerzbank AG,"Praktikant, Big Data und Advanced Analytics Projektcontrolling AI",Frankfurt,LinkedIn,applied,drafts/Commerzbank Frankfurt Praktikant Big Data Advanced Analytics Projektcontrolling AI/
 8/12/26,BMW Group,"Abschlussarbeit, KI-Agenten fuer die Produktionsplanung von Hochvoltspeichern",Muenchen,BMW Career Page,applied,drafts/BMW Muenchen Abschlussarbeit KI-Agenten Produktionsplanung Hochvoltspeicher/
 8/12/26,SAP,"Working Student, Engagement Lead for AI Vision Cases",Walldorf,SAP Career Page,Not listed Anymore,drafts/SAP Walldorf Working Student Engagement Lead AI Vision Cases/
@@ -136,3 +136,6 @@ date,company,role,location,source,status,draft_path
 8/15/26,Phoenix Contact,"Werkstudent, Data Science und KI",Blomberg,LinkedIn,drafted,drafts/Phoenix Contact Blomberg Werkstudent Data Science AI/
 8/15/26,BSH Home Appliances Group,"Working Student, Engineering Data Analytics and Classification",Munich,LinkedIn,drafted,drafts/BSH Home Appliances Munich Working Student Data Analytics Classification/
 8/15/26,viadee Unternehmensberatung AG,"Werkstudent, Data Science und Process Mining",Koeln,Xing,drafted,drafts/viadee Unternehmensberatung Koeln Werkstudent Data Science Process Mining/
+8/15/26,BMW Group,"Werkstudent, Data Science und KI Tool Entwicklung fuer Qualitaetsanalyse",Muenchen,BMW Career Page,drafted,drafts/BMW Muenchen Werkstudent Data Science KI Tool Qualitaetsanalyse/
+8/15/26,KfW Bankengruppe,"Werkstudent, IT Data Science und KI",Frankfurt,Xing,drafted,drafts/KfW Bankengruppe Frankfurt Werkstudent IT Data Science KI/
+8/15/26,Allianz Insurance,"Working Student, Data Science",Munich,Xing,drafted,drafts/Allianz Insurance Muenchen Working Student Data Science/
