@@ -1,0 +1,15 @@
+# Rahul Rawat
+
+## Masterarbeit im Bereich Process Mining
+
+Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim und praktischer Erfahrung im Aufbau end to end Datenpipelines, Machine Learning auf Prozessdaten und BI Reporting. Ich habe eine vollstaendig automatisierte Bronze Silver Gold Medallion Pipeline in BigQuery mit einem leakage freien BigQuery ML Klassifikator und fuenfseitigem Looker Studio Dashboard umgesetzt, eine Echtzeit Cloud Pipeline mit PySpark, dbt und Apache Airflow ueber mehr als 128 tausend Datensaetze betrieben und ein interaktives Tableau Dashboard mit dynamischen Set Actions und parametergesteuerten Analytiken ausgeliefert. Sicher in Python, SQL und mit analytischem und konzeptionellem Blick fuer betriebliche Prozessdaten, bin ich die richtige Verstaerkung fuer die Masterarbeit im Process Mining bei ROSEN in Lingen.
+
+### Experience
+
+**eRay GmbH**, Data Scientist, Oct 2025 to Mar 2026
+
+* Im Rahmen einer sechsmonatigen Zusammenarbeit zwischen eRay GmbH und SRH Hochschule Heidelberg zur Prognose der Wasserqualität eines deutschen Sees, mit dem Auftrag vier Indikatoren über rollende Horizonte zu prognostizieren, wurde eine end to end rekursive Zeitreihen Pipeline für Chlorophyll a, Trübung, pH Wert und gelösten Sauerstoff aufgebaut, als produktionsreifes Modul geliefert, das der Kunde bei jeder neuen Sensordatenlieferung erneut ausführen kann.
+* Angesichts unklarer Modellwahl für die Prognoseaufgabe und der Notwendigkeit, Unsicherheit gegenüber nichttechnischen Stakeholdern verständlich zu machen, wurden sechs Kandidaten direkt verglichen, Ridge, Gradient Boosting, LightGBM, XGBoost, CatBoost und Prophet, und die Entscheidung fiel auf CatBoost Multi Quantil Regression, die asymmetrische 80 Prozent Vorhersageintervalle lieferte und dem Kunden Entscheidungsunterstützung unter Unsicherheit ermöglichte.
+* Aus der Sorge, dass naive Zeitreihen Splits die Genauigkeit verzerren würden, mit dem Auftrag die Evaluation belastbar zu machen, wurden strenge Anti Leakage Regeln in der gesamten Pipeline erzwungen, was die ehrliche Erkenntnis offenlegte, dass pH Wert und gelöster Sauerstoff physikalisch vorhersagbar sind, während Chlorophyll a und Trübung ohne optische Live Sensorik nicht seriös prognostizierbar sind.
+* Bei fehlenden Winter Messwerten und baumbasierten Modellen, die während der rekursiven Vorhersage flach wurden, mit dem Ziel realistische saisonale Muster in den nachgelagerten Prognosen zu erhalten, wurden fehlende Werte mit MICE Imputation rekonstruiert und ein synthetischer Winter Decay Prognose Rahmen entwickelt, was glaubwürdiges Winterverhalten wiederherstellte, ohne Verzerrung in das Trainingsfenster einzubringen.
+* Um zu verhindern, dass fehlerhafte Daten sich rekursiv durch den Forecaster fortpflanzen, mit dem Auftrag die Ausführungsschleife zu härten, wurde die Pipeline mit einem Orchestrator mit Gate Checks sowie Geschwindigkeits und ökologischen Grenzen umschlossen, sodass eine fehlgeschlagene Imputation nun den Lauf stoppt, statt Wochen nachgelagerter Vorhersagen zu beschädigen.

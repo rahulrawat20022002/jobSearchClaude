@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rahul Rawat — CV Preview v2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    background: #f0eee9;
+    color: #1f2937;
+    padding: 32px 16px;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 20px 60px rgba(20, 30, 60, .12);
+    padding: 18mm 18mm 16mm 18mm;
+    border-radius: 4px;
+  }
+
+  /* ---------- header ---------- */
+  .header {
+    text-align: center;
+    padding-bottom: 8mm;
+    border-bottom: 1px solid #e6e3dc;
+    margin-bottom: 8mm;
+  }
+  .header h1 {
+    font-size: 26pt;
+    font-weight: 700;
+    color: #2f4c6b;
+    letter-spacing: 1px;
+    margin-bottom: 2mm;
+  }
+  .header .tagline {
+    font-size: 10.5pt;
+    color: #7a8291;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    margin-bottom: 4mm;
+  }
+  .header .contact {
+    font-size: 9.5pt;
+    color: #4a5361;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6mm;
+    flex-wrap: wrap;
+  }
+  .header .contact .item {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5mm;
+  }
+  .header .contact svg {
+    width: 3.2mm;
+    height: 3.2mm;
+    color: #c19660;
+  }
+
+  /* ---------- section ---------- */
+  .section {
+    margin-bottom: 7mm;
+  }
+  .section h2 {
+    font-size: 11pt;
+    color: #2f4c6b;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 4mm;
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+  }
+  .section h2::before {
+    content: "";
+    width: 8mm;
+    height: 2px;
+    background: #c19660;
+    border-radius: 1px;
+  }
+  .section h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e6e3dc;
+    margin-left: 2mm;
+  }
+
+  .profile-text {
+    font-size: 10.5pt;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333a4d;
+  }
+
+  /* ---------- entry ---------- */
+  .entry {
+    margin-bottom: 5mm;
+  }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4mm;
+    margin-bottom: .8mm;
+  }
+  .entry-head .title {
+    font-size: 11.5pt;
+    font-weight: 700;
+    color: #2f4c6b;
+  }
+  .entry-head .dates {
+    font-size: 10pt;
+    color: #7a8291;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .entry .sub {
+    font-size: 10pt;
+    color: #7a8291;
+    font-style: italic;
+    margin-bottom: 2.5mm;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5mm;
+    margin: 1mm 0 2.5mm 0;
+  }
+  .pill {
+    font-size: 8.5pt;
+    background: #f7f4ec;
+    color: #7a5c2e;
+    padding: .8mm 3mm;
+    border-radius: 3mm;
+    font-weight: 500;
+    border: 1px solid #ebe3d0;
+  }
+
+  .entry ul {
+    list-style: none;
+    padding: 0;
+  }
+  .entry ul li {
+    font-size: 10.5pt;
+    line-height: 1.55;
+    text-align: justify;
+    color: #333a4d;
+    padding-left: 5mm;
+    position: relative;
+    margin-bottom: 1.8mm;
+  }
+  .entry ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2.6mm;
+    width: 1.8mm;
+    height: 1.8mm;
+    background: #c19660;
+    border-radius: 50%;
+  }
+
+  /* ---------- skills grid ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 42mm 1fr;
+    row-gap: 2.5mm;
+    column-gap: 4mm;
+    font-size: 10pt;
+  }
+  .skills-grid .k {
+    color: #2f4c6b;
+    font-weight: 600;
+  }
+  .skills-grid .v {
+    color: #333a4d;
+    line-height: 1.5;
+  }
+
+  /* ---------- languages ---------- */
+  .lang-line {
+    font-size: 10.5pt;
+    color: #333a4d;
+    line-height: 1.6;
+  }
+  .lang-line strong { color: #2f4c6b; }
+
+  /* ---------- print ---------- */
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #ffffff; padding: 0; }
+    .page { box-shadow: none; border-radius: 0; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>Rahul Rawat</h1>
+    <div class="tagline">Data Science and Analytics Master student, Mannheim, Germany</div>
+    <div class="contact">
+      <span class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 4l8 8 8-8"/></svg>
+        rahulrawat2r@gmail.com
+      </span>
+      <span class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92V21a1 1 0 0 1-1.09 1 19 19 0 0 1-8.29-3 19 19 0 0 1-6-6A19 19 0 0 1 3.6 4.09 1 1 0 0 1 4.6 3h4.1a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.29 1L8.9 10.4a16 16 0 0 0 6 6l1.65-1.51a1 1 0 0 1 1-.29l4 1a1 1 0 0 1 .75 1z"/></svg>
+        015563603340
+      </span>
+      <span class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/rahulrawat2r
+      </span>
+      <span class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        github.com/rahulrawat20022002
+      </span>
+    </div>
+  </header>
+
+  <!-- PROFILE -->
+  <section class="section">
+    <h2>Profile</h2>
+    <p class="profile-text">Data Science and Analytics Master student at SRH Heidelberg with hands on experience shipping time series forecasting pipelines, classification models with fairness and explainability, and Retrieval Augmented Generation systems. Comfortable across the full stack from PySpark and BigQuery through scikit-learn, CatBoost, and LangChain to Streamlit, Tableau, and Looker Studio. Direct professional communicator who documents workflows so teammates can pick up and extend the work.</p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section">
+    <h2>Experience</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="title">eRay GmbH</span>
+        <span class="dates">Oct 2025 to Mar 2026</span>
+      </div>
+      <div class="sub">Data Scientist</div>
+      <ul>
+        <li>Built an end to end recursive time series pipeline forecasting chlorophyll a, turbidity, pH, and dissolved oxygen for a German lake, delivered as a six month collaboration with SRH University Heidelberg.</li>
+        <li>Benchmarked six models head to head, Ridge, Gradient Boosting, LightGBM, XGBoost, CatBoost, and Prophet, and used CatBoost multi quantile regression to produce asymmetric 80 percent prediction intervals.</li>
+        <li>Enforced strict anti leakage rules across the pipeline, surfacing the honest finding that pH and dissolved oxygen are physically predictable while chlorophyll a and turbidity are not without live optical sensors.</li>
+        <li>Reconstructed missing winter readings with MICE imputation and wrapped the pipeline in an orchestrator with gate checks that halts on failed imputation rather than letting bad data cascade downstream.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section">
+    <h2>Education</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="title">M.Sc. Data Science and Analytics</span>
+        <span class="dates">Apr 2025 to Present</span>
+      </div>
+      <div class="sub">SRH University of Applied Sciences Heidelberg</div>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="title">Bachelor of Technology in Computer Science</span>
+        <span class="dates">2019 to 2023</span>
+      </div>
+      <div class="sub">GL Bajaj Institute of Technology and Management</div>
+    </div>
+  </section>
+
+  <!-- PERSONAL PROJECTS -->
+  <section class="section">
+    <h2>Personal Projects</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="title">Hybrid RAG Orchestrator</span>
+      </div>
+      <div class="stack">
+        <span class="pill">Python</span><span class="pill">LangChain</span><span class="pill">Llama 3.1 8b</span><span class="pill">ChromaDB</span><span class="pill">HuggingFace</span><span class="pill">Streamlit</span>
+      </div>
+      <ul>
+        <li>Designed a modular Retrieval Augmented Generation system using Llama 3.1 8b through Groq for high speed inference and LangChain for orchestration.</li>
+        <li>Engineered a custom router that dynamically classifies user intent into three paths, local vector retrieval, external web search, or direct conversational logic.</li>
+        <li>Built a stateful MemoryAgent that maintains conversational context across turns, integrated directly into the inference pipeline and shipped behind a Streamlit interface.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="title">CreditIQ, Fairness by Design Credit Scoring System</span>
+      </div>
+      <div class="stack">
+        <span class="pill">Python</span><span class="pill">scikit-learn</span><span class="pill">AIF360</span><span class="pill">SHAP</span><span class="pill">Streamlit</span>
+      </div>
+      <ul>
+        <li>Lifted the model's Disparate Impact ratio from a failing 0.79 to a compliant 0.88, clearing the EU AI Act and AGG 80 percent fairness threshold.</li>
+        <li>Diagnosed a hidden intersectional bias where younger women were still being penalised even after single axis age bias was fixed, using SHAP, then designed a four way age by gender threshold matrix to correct it.</li>
+        <li>Cut the false negative rate from 44 percent to 16.7 percent while holding accuracy at 75 percent, documenting the fairness accuracy trade off as a regulator defensible decision.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="title">Real Time Flight Tracking Data Pipeline</span>
+      </div>
+      <div class="stack">
+        <span class="pill">Python</span><span class="pill">PySpark</span><span class="pill">BigQuery</span><span class="pill">dbt</span><span class="pill">Airflow</span><span class="pill">GCP</span><span class="pill">Tableau</span>
+      </div>
+      <ul>
+        <li>Set up real time data collection from the OpenSky Network API, polling live flight positions every 30 seconds and enriching each observation against airport, aircraft, and weather data from four sources.</li>
+        <li>Cleaned raw data with PySpark on Google Cloud and shaped analytics ready tables with dbt, orchestrated by Airflow with automated 15 minute refresh yielding more than 128 thousand joined records.</li>
+        <li>Surfaced findings in Tableau with Python statistics served through TabPy, showing air traffic dropped by a factor of 4.4 in heavy rain and clustered around hubs like Frankfurt and Munich.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="k">Languages and Data</div>
+      <div class="v">Python, SQL, PySpark, Pandas, NumPy</div>
+
+      <div class="k">Machine Learning</div>
+      <div class="v">scikit-learn, CatBoost, XGBoost, LightGBM, Prophet, SHAP, AIF360, time series forecasting</div>
+
+      <div class="k">GenAI and NLP</div>
+      <div class="v">LangChain, RAG, ChromaDB, HuggingFace embeddings, Llama 3.1</div>
+
+      <div class="k">Data Engineering</div>
+      <div class="v">Apache Airflow, dbt, BigQuery, Hadoop, Docker, medallion architecture</div>
+
+      <div class="k">Cloud and BI</div>
+      <div class="v">GCP, BigQuery ML, Cloud Run, Tableau, Looker Studio, TabPy</div>
+    </div>
+  </section>
+
+  <!-- RESEARCH & THESIS -->
+  <section class="section">
+    <h2>Research and Thesis</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="title">Bachelor Thesis, Diabetes Prediction Using Machine Learning</span>
+      </div>
+      <div class="sub">GL Bajaj Institute of Technology and Management, IEEE style paper</div>
+      <ul>
+        <li>Built a full end to end machine learning pipeline comparing six classifiers on a clinical diabetes dataset of 768 patients, using 10 fold cross validation and per model confusion matrices.</li>
+        <li>Caught biologically impossible zero values that the original authors had overlooked, then applied IQR based outlier removal and proper imputation to restore data integrity.</li>
+        <li>Chose ROC AUC over accuracy as the headline metric for a 65 to 35 imbalanced dataset, avoiding a misleadingly rosy accuracy figure that would have hidden real error patterns.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section class="section">
+    <h2>Languages</h2>
+    <p class="lang-line"><strong>English:</strong> fluent, professional working proficiency. &nbsp; <strong>German:</strong> B1, in progress.</p>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# OS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor/tool artifacts
+*.swp

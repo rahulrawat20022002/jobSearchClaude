@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rahul Rawat, Working Student</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background: #ffffff;
+  color: #2b2f3a;
+}
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #ffffff;
+}
+.header {
+  padding: 12mm 18mm 5mm 18mm;
+  position: relative;
+  text-align: center;
+}
+.header::after {
+  content: "";
+  position: absolute;
+  left: 18mm;
+  right: 18mm;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #1f5f6b 30%, #b8663f 70%, transparent 100%);
+}
+.header h1 {
+  font-size: 24pt;
+  font-weight: 700;
+  color: #1f5f6b;
+  letter-spacing: 2px;
+  margin-bottom: 2mm;
+}
+.tagline-strip {
+  display: inline-block;
+  background: #b8663f;
+  color: #ffffff;
+  font-size: 9.5pt;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 1mm 6mm;
+  margin-bottom: 3mm;
+  font-weight: 600;
+}
+.contact {
+  font-size: 9pt;
+  color: #4a5361;
+  text-align: center;
+  margin-bottom: 3mm;
+}
+.contact .item {
+  display: inline-block;
+  margin: 0 3mm;
+  white-space: nowrap;
+}
+.contact .item .icon {
+  color: #b8663f;
+  font-weight: 700;
+  margin-right: 1mm;
+}
+.body-wrap { padding: 5mm 15mm 10mm 15mm; }
+.section { margin-bottom: 4mm; }
+.section h2 {
+  font-size: 10.5pt;
+  color: #1f5f6b;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  margin-bottom: 2.5mm;
+  border-bottom: 1px solid #e6e0d3;
+  padding-bottom: 1mm;
+  position: relative;
+}
+.section h2::before {
+  content: "";
+  display: inline-block;
+  width: 10mm;
+  height: 3px;
+  background: #b8663f;
+  border-radius: 1.5px;
+  margin-right: 3mm;
+  vertical-align: middle;
+}
+.profile-text {
+  font-size: 10.5pt;
+  line-height: 1.45;
+  text-align: justify;
+  color: #2b2f3a;
+}
+.entry { margin-bottom: 3mm; }
+.entry:last-child { margin-bottom: 0; }
+.entry-head { margin-bottom: .8mm; }
+.entry-head .title {
+  font-size: 11.5pt;
+  font-weight: 700;
+  color: #1f5f6b;
+}
+.entry-head .dates {
+  font-size: 10pt;
+  color: #b8663f;
+  font-weight: 600;
+  float: right;
+}
+.entry .sub {
+  font-size: 10pt;
+  color: #7a6b58;
+  font-style: italic;
+  margin-bottom: 1.5mm;
+  clear: both;
+}
+.stack { margin: .5mm 0 1.5mm 0; }
+.pill {
+  display: inline-block;
+  font-size: 8.5pt;
+  background: #ffffff;
+  color: #b8663f;
+  padding: .8mm 3mm;
+  border-radius: 3mm;
+  font-weight: 500;
+  border: 1px solid #b8663f;
+  margin-right: 1.5mm;
+  margin-bottom: 1.5mm;
+}
+.entry ul { list-style: none; padding: 0; }
+.entry ul li {
+  font-size: 10.5pt;
+  line-height: 1.4;
+  text-align: justify;
+  color: #2b2f3a;
+  padding-left: 6mm;
+  position: relative;
+  margin-bottom: 1mm;
+}
+.entry ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2mm;
+  width: 3mm;
+  height: 2px;
+  background: #b8663f;
+}
+.lang-line {
+  font-size: 10.5pt;
+  color: #2b2f3a;
+  line-height: 1.6;
+}
+.lang-line strong { color: #1f5f6b; }
+@page { size: A4; margin: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <h1>Rahul Rawat</h1>
+    <div class="tagline-strip">Working Student</div>
+    <div class="contact"><span class="item"><span class="icon">@</span>rahulrawat2r@gmail.com</span><span class="item"><span class="icon">T</span>015563603340</span><span class="item"><span class="icon">in</span>linkedin.com/in/rahulrawat2r</span><span class="item"><span class="icon">gh</span>github.com/rahulrawat20022002</span><span class="item"><span class="icon">Loc</span>Mannheim, Germany</span></div>
+  </header>
+  <div class="body-wrap">
+    <section class="section">
+      <h2>Profile</h2>
+      <p class="profile-text">Data Science and Analytics Master student at SRH Heidelberg with hands on experience shipping time series forecasting pipelines that run against real sensor data. My six month collaboration with eRay GmbH built recursive forecasts for four water quality signals using CatBoost multi quantile regression, strict anti leakage rules, and MICE imputation, exactly the mix of ML engineering and honest evaluation that a live production energy forecasting stack needs. I am fluent in Python, comfortable with SQL and BigQuery from my cloud pipeline projects, and keen to contribute to 1KOMMA5&#x27;s Heartbeat AI and agentic workflow ambitions.</p>
+    </section>
+    <section class="section">
+      <h2>Experience</h2>
+      <div class="entry"><div class="entry-head"><span class="dates">Oct 2025 to Mar 2026</span><span class="title">eRay GmbH</span></div><div class="sub">Data Scientist</div><ul><li>Built an end to end recursive time series pipeline forecasting chlorophyll a, turbidity, pH, and dissolved oxygen for a German lake, delivered as a six month collaboration with SRH University Heidelberg.</li><li>Benchmarked six models head to head, Ridge, Gradient Boosting, LightGBM, XGBoost, CatBoost, and Prophet, and used CatBoost multi quantile regression to produce asymmetric 80 percent prediction intervals.</li><li>Enforced strict anti leakage rules across the pipeline, surfacing the honest finding that pH and dissolved oxygen are physically predictable while chlorophyll a and turbidity are not without live optical sensors.</li><li>Reconstructed missing winter readings with MICE imputation and engineered a synthetic winter decay forecast canvas so tree based models stopped flatlining during recursive prediction.</li><li>Wrapped the whole pipeline in an orchestrator with gate checks and velocity and ecological bounds that halts on failed imputation rather than letting bad data cascade downstream.</li></ul></div>
+    </section>
+    <section class="section">
+      <h2>Education</h2>
+      <div class="entry"><div class="entry-head"><span class="dates">Apr 2025 to Present</span><span class="title">M.Sc. Data Science and Analytics</span></div><div class="sub">SRH University of Applied Sciences Heidelberg</div></div><div class="entry"><div class="entry-head"><span class="dates">2019 to 2023</span><span class="title">Bachelor of Technology in Computer Science</span></div><div class="sub">GL Bajaj Institute of Technology and Management</div></div>
+    </section>
+    <section class="section">
+      <h2>Personal Projects</h2>
+      <div class="entry"><div class="entry-head"><span class="title">Real Time Flight Tracking Data Pipeline</span></div><div class="stack"><span class="pill">Python</span><span class="pill">PySpark</span><span class="pill">BigQuery</span><span class="pill">dbt</span><span class="pill">Apache Airflow</span><span class="pill">GCP Dataproc</span><span class="pill">GCE</span><span class="pill">GCS</span><span class="pill">Tableau</span><span class="pill">TabPy</span><span class="pill">OAuth2</span></div><ul><li>Set up real time data collection from the OpenSky Network API, polling live flight positions every 30 seconds and enriching each observation against airport, aircraft, and weather data from four external sources.</li><li>Cleaned raw data with PySpark on Google Cloud and shaped it into analysis ready tables with dbt, computing each aircraft&#x27;s nearest airport along the way and yielding more than 128 thousand joined records.</li><li>Orchestrated the whole system with Apache Airflow so that the batch and real time layers refresh automatically every 15 minutes with no manual intervention.</li><li>Surfaced findings in Tableau with Python statistics served through TabPy, showing that air traffic dropped by a factor of 4.4 in heavy rain and clustered heavily around hubs such as Frankfurt and Munich.</li></ul></div><div class="entry"><div class="entry-head"><span class="title">Movie Analytics and ML Pipeline, Cloud Native Data Platform</span></div><div class="stack"><span class="pill">GCP BigQuery</span><span class="pill">Cloud Run</span><span class="pill">GCS</span><span class="pill">Cloud Scheduler</span><span class="pill">BigQuery ML</span><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">Looker Studio</span></div><ul><li>Built an end to end batch pipeline pulling movie data from a public API into a GCS data lake, processed through a Bronze to Silver to Gold medallion architecture in BigQuery, and fully automated on a Cloud Scheduler trigger with no manual steps.</li><li>Engineered the Silver layer for trustworthy analytics with schema enforcement, safe type casting, deduplication through window functions, and genre normalisation into a relational model.</li><li>Trained a BigQuery ML classifier to predict whether a film will be a hit before release, deliberately splitting features into two tables to prevent data leakage so that only pre release signals feed the model.</li><li>Built Gold layer aggregates and a five page Looker Studio dashboard answering concrete business questions on genre ROI, foreign language growth, and release season timing, plus an ML early warning view.</li><li>Secured the system with a least privilege service account and Secret Manager and version controlled all code, SQL, and schemas in a reproducible GitHub repository.</li></ul></div><div class="entry"><div class="entry-head"><span class="title">Hybrid RAG Orchestrator</span></div><div class="stack"><span class="pill">Python</span><span class="pill">LangChain</span><span class="pill">Llama 3.1 8b via Groq</span><span class="pill">ChromaDB</span><span class="pill">HuggingFace MiniLM L6 v2</span><span class="pill">Streamlit</span></div><ul><li>Designed a modular Retrieval Augmented Generation system using Llama 3.1 8b through Groq for high speed inference and LangChain for orchestration.</li><li>Engineered a custom decision making router that dynamically classifies user intent into three execution paths, local knowledge retrieval from a PDF vector store, external web search through DuckDuckGo, or direct conversational logic.</li><li>Implemented ChromaDB with local persistence for document storage and used HuggingFace MiniLM L6 v2 for semantic embeddings across the retrieval corpus.</li><li>Built a stateful MemoryAgent that maintains conversational context across multiple turns, integrated directly into the inference pipeline, and shipped the whole system behind a Streamlit interface end to end.</li></ul></div>
+    </section>
+    <section class="section">
+      <h2>Research and Thesis</h2>
+      <div class="entry"><div class="entry-head"><span class="title">Bachelor Thesis, Diabetes Prediction Using Machine Learning</span></div><div class="sub">GL Bajaj Institute of Technology and Management, IEEE style paper</div><ul><li>Built a full end to end machine learning pipeline comparing six classifiers on a clinical diabetes dataset of 768 patients, using 10 fold cross validation and per model confusion matrices.</li><li>Caught biologically impossible zero values that the original authors had overlooked, then applied IQR based outlier removal and proper imputation to restore data integrity.</li><li>Chose ROC AUC over accuracy as the headline metric for a 65 to 35 imbalanced dataset, avoiding a misleadingly rosy accuracy figure that would have hidden real error patterns.</li><li>Wrote up findings as an IEEE style paper including an honest section on limitations and what to do differently in a follow up study.</li></ul></div>
+    </section>
+    <section class="section">
+      <h2>Languages</h2>
+      <p class="lang-line"><strong>English:</strong> fluent, professional working proficiency.
+      &nbsp; <strong>German:</strong> B1, in progress.</p>
+    </section>
+  </div>
+</div>
+</body>
+</html>
