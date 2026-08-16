@@ -34,7 +34,7 @@ Both agents pull the latest repo at run start. Only Cowork pushes. OpenClaw neve
 **Trigger:** scheduled task in Cowork, runs on cron in the cloud sandbox.
 **Repo path at run time:** /tmp/JobSearch (cloned fresh each run).
 **Owns writes to:** applied-log.csv, files under drafts/*, Job_Digest_YYYY-MM-DD.md, role_configs_YYYYMMDD.py, run_YYYYMMDD.py, new Notion rows in status drafted, Gmail drafts of the daily digest, git commits and pushes to main.
-**Never touches:** Notion Status flips out of drafted, Notion Date Applied, Notion Outreach Status, the LinkedIn or Xing compose windows, any files under /Users/rahulrawat/Desktop/JobSearch (that's OpenClaw's working checkout).
+**Never touches:** Notion Status flips out of drafted, Notion Date Applied, Notion Outreach Status, the LinkedIn or Xing compose windows, any files under /Users/rahulrawat/Desktop/jobSearchClaude (that's OpenClaw's working checkout).
 
 ### Cowork step-by-step
 
@@ -67,7 +67,7 @@ Optimising for HONESTY over throughput. A run that drafts zero roles and reports
 ## Agent B, the OpenClaw Submission Agent
 
 **Trigger:** manual, from Telegram or Rah's Mac, not on a cron.
-**Repo path at run time:** /Users/rahulrawat/Desktop/JobSearch (local working checkout; git pull at start).
+**Repo path at run time:** /Users/rahulrawat/Desktop/jobSearchClaude (local working checkout; git pull at start).
 **Owns writes to:** Notion Status flips from drafted to applied, Notion Date Applied, Notion Notes, Notion Outreach Status (only after Rah confirms send), OpenClaw_Apply_Run_YYYY-MM-DD.md digest file.
 **Never touches:** CLAUDE.md, master-projects.md, applied-log.csv, any file under drafts/, and never `git commit` or `git push`.
 
@@ -92,7 +92,7 @@ Optimising for HONESTY over throughput. A run that drafts zero roles and reports
 which python3 && python3 --version
 python3 -c "import requests; print('requests ok')"
 echo $NOTION_API_TOKEN | head -c 10 && echo
-cd /Users/rahulrawat/Desktop/JobSearch && git status && git pull --rebase origin main
+cd /Users/rahulrawat/Desktop/jobSearchClaude && git status && git pull --rebase origin main
 ```
 
 If git pull errors due to local changes, do NOT force. Report the conflict and halt. Rah resolves manually.
@@ -142,7 +142,7 @@ If git pull errors due to local changes, do NOT force. Report the conflict and h
 
    Outcomes: `applied`, `halted-CAPTCHA`, `halted-login-wall`, `halted-verification-failed`, `halted-upload-rejected`, `halted-required-field-unknown`, `skipped-outreach-only`. Never invent an outcome.
 
-6. Digest and report back. Write /Users/rahulrawat/Desktop/JobSearch/OpenClaw_Apply_Run_YYYY-MM-DD.md with:
+6. Digest and report back. Write /Users/rahulrawat/Desktop/jobSearchClaude/OpenClaw_Apply_Run_YYYY-MM-DD.md with:
    - Preflight results
    - Number of drafted rows queried
    - Per-role table from step 5
