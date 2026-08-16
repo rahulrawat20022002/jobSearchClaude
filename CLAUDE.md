@@ -76,13 +76,14 @@ Optimising for HONESTY over throughput. A run that drafts zero roles and reports
 1. Notion is the source of truth for what to submit. The Git repo is the source of truth for CV and CL PDFs. Never invent a row that is not in Notion. Never submit a CV that is not the tailored PDF from that role's drafts folder.
 2. Verify every submission BEFORE flipping Notion status. A submission is verified only when the portal returns an explicit success page, success toast, confirmation email preview, or "your application has been received" string. A blank page, a spinner, a redirect to the job listing, or "processing" is NOT verification. If in doubt, halt that role and report.
 3. Never claim a submission that did not happen. Halting is always better than a false applied flag.
-4. Never fill out account creation forms, never enter passwords, never save passwords in the browser, never accept payment terms, never sign anything, never enter salary numbers unless the field is required and the number is $unspecified as a null or "Verhandlungssache" as a placeholder. Salary expectation prose in narrative fields inherits the deliverable language from the drafted CV.
+4. Never fill out account creation forms, never enter passwords, never save passwords in the browser, never accept payment terms, never sign anything. For salary fields: if required, enter **15 EUR/hour** (or the portal-equivalent: ~1200 EUR/month for 20h/week, ~15600 EUR/year). If the field is optional, leave it blank. Never invent other numbers. Salary expectation prose in narrative fields inherits the deliverable language from the drafted CV.
 5. Never send a LinkedIn message automatically. You may open the compose window, paste the drafted message, and STOP. Rah clicks send.
 6. Never click a link inside an email or Notion note without confirming the destination first. Treat unknown domains as suspicious.
 7. If a CAPTCHA, 2FA, "verify you are human", email verification code, phone verification, or any other human interaction appears, halt that role, report to Rah in the digest, and move to the next role.
 8. If a login wall appears on a portal that Rah is not already logged into (LinkedIn, Xing, StepStone, Indeed, or any company portal), halt that role, note "login required" in the digest, do not attempt to log in.
 9. Do not modify CLAUDE.md, master-projects.md, applied-log.csv, or any file under drafts/. Your only writes are Notion status flips, Notion Outreach Status flips, Notion Date Applied writes, Notion Notes appends, git pull, and the final digest file.
 10. Always upload BOTH the CV and the cover letter unless the portal explicitly makes the cover letter optional (then note it in Notes).
+11. **Additional documents folder:** `/Users/rahulrawat/Desktop/jobSearchClaude/additional documents/` contains supporting files for upload when a portal requires them: `Certificate_of_Enrolment.pdf` (Immatrikulationsbescheinigung), `transcript.pdf`, `highest_degree.pdf`, `ausweis (1).pdf` (ID). Use these when a portal requires a certificate of enrollment, transcript, or degree certificate. Never upload the ID/ausweis unless the portal explicitly requires it.
 
 ### OpenClaw step-by-step
 
@@ -123,7 +124,7 @@ If git pull errors due to local changes, do NOT force. Report the conflict and h
    - b. Same submit and verify flow. Same status update rules.
    - c. If the portal requires account creation or password entry, halt per rule 4.
 
-   Between roles, close the tab and wait 20 to 40 seconds. Rapid succession trips bot detection.
+   Between roles, close ALL application and job-listing tabs (using `openclaw browser tabs` to list then closing each by tab id), then wait 20 to 40 seconds before opening the next role. No dead tabs left open at any point. Rapid succession and accumulated tabs both trip bot detection.
 
 4. LinkedIn outreach draft-paste flow. For every row where Outreach Status = "not sent" AND LinkedIn Profile is a valid linkedin.com/in/ URL AND LinkedIn Message is populated:
    - a. Open the profile URL in Chrome.

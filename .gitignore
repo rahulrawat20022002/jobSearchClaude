@@ -9,3 +9,4 @@ __pycache__/
 
 # Editor/tool artifacts
 *.swp
+*.env

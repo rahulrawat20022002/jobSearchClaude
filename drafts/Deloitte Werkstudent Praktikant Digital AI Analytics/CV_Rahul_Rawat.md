@@ -1,8 +1,8 @@
 # Rahul Rawat
 
-## Werkstudent Data Science und Process Mining
+## Werkstudent oder Praktikant im Bereich Digital und AI Analytics
 
-Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim und praktischer Erfahrung in Python basierter Datenanalyse, ML Pipelines und Cloud Orchestrierung auf realen Ereignis und Sensordaten. Bei eRay GmbH habe ich eine end to end rekursive Zeitreihen Pipeline ueber 40 Merkmale gebaut, die aus rohen Sensordaten mit Luecken und biologisch unmoeglichen Werten eine bereinigte Modellierungseingabe erzeugt, und im Rahmen eines Data Engineering Moduls an der SRH eine Echtzeit Datenpipeline auf GCP mit PySpark, dbt und Airflow. Sicher in Python, SQL, PySpark, dbt, Airflow, BigQuery, scikit-learn, CatBoost, LangGraph, GCP und AWS.
+Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim und praktischer Erfahrung im Aufbau von Analytics Loesungen, Business Intelligence Dashboards und KI Werkzeugen fuer regulierte und wirtschaftsnahe Fragestellungen. Ich habe in CreditIQ ein Kredit Scoring System unter EU AI Act Konformitaet gebaut, ein Multi Agent RAG System fuer Policy Analyse mit LLM as Judge Evaluation entwickelt und interaktive Tableau Dashboards mit dynamischer Warenkorb Simulation ausgeliefert. Sicher in Python, SQL, scikit-learn, LangGraph, Tableau, Power BI und Looker Studio.
 
 ### Experience
 

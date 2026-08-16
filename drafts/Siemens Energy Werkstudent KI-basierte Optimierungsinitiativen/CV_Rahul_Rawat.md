@@ -1,8 +1,8 @@
 # Rahul Rawat
 
-## Werkstudent Data Science und Process Mining
+## Werkstudent KI-basierte Optimierungsinitiativen
 
-Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim und praktischer Erfahrung in Python basierter Datenanalyse, ML Pipelines und Cloud Orchestrierung auf realen Ereignis und Sensordaten. Bei eRay GmbH habe ich eine end to end rekursive Zeitreihen Pipeline ueber 40 Merkmale gebaut, die aus rohen Sensordaten mit Luecken und biologisch unmoeglichen Werten eine bereinigte Modellierungseingabe erzeugt, und im Rahmen eines Data Engineering Moduls an der SRH eine Echtzeit Datenpipeline auf GCP mit PySpark, dbt und Airflow. Sicher in Python, SQL, PySpark, dbt, Airflow, BigQuery, scikit-learn, CatBoost, LangGraph, GCP und AWS.
+Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim und praktischer Erfahrung im Aufbau von LLM Werkzeugen, Multi Agent Systemen und Machine Learning Pipelines. Ich habe ein Multi Agent RAG System mit LangGraph, Ollama Mistral 7B und Qwen2.5 14B mit belastbarer LLM as Judge Evaluation ueber 5 Dimensionen gebaut und bei eRay GmbH eine end to end rekursive Zeitreihen Pipeline mit CatBoost MultiQuantile fuer 4 Umweltindikatoren geliefert. Sicher in Python, SQL, LangGraph, scikit-learn, CatBoost, GCP und AWS.
 
 ### Experience
 
