@@ -1,6 +1,6 @@
 # CLAUDE.md, Rah's Job Search, Both Agents Rule Book
 
-Last restructured 15 August 2026 to reflect the split between the Cowork drafting agent and the OpenClaw submission agent. Both agents read this file at run start. Each agent obeys only its own section plus the shared invariants. Neither agent may touch the other's territory. Historical dated rules referenced by past digests remain binding.
+Last restructured 16 August 2026 to reflect the split between the Cowork drafting agent and the OpenClaw submission agent, and to narrow OpenClaw's scope to platform-native listings only. Both agents read this file at run start. Each agent obeys only its own section plus the shared invariants. Neither agent may touch the other's territory. Historical dated rules referenced by past digests remain binding.
 
 ---
 
@@ -9,7 +9,8 @@ Last restructured 15 August 2026 to reflect the split between the Cowork draftin
 | Concern | Owner | Never touched by |
 |---|---|---|
 | Search, score, tailor, render CV and CL, write to applied-log.csv, commit and push git, create new Notion rows in status drafted, create Gmail draft of daily digest | Cowork Drafting Agent | OpenClaw |
-| Open Apply Link in browser, upload CV and CL PDFs, submit, verify success, flip Notion Status from drafted to applied, set Date Applied, paste LinkedIn outreach into compose window for Rah to send, write OpenClaw_Apply_Run digest | OpenClaw Submission Agent | Cowork |
+| Open Apply Link in browser for platform-native listings only (LinkedIn, Xing, StepStone, Indeed Easy-Apply flows), upload CV and CL PDFs, submit, verify success, flip Notion Status from drafted to applied, set Date Applied, paste LinkedIn outreach into compose window for Rah to send, write OpenClaw_Apply_Run digest | OpenClaw Submission Agent | Cowork |
+| Company-portal submissions (careers.bmwgroup.jobs, jobs.sap.com, jobs.siemens.com, careers.bshgroup.com, and any other company-owned careers domain) | Rah, manually | Both agents |
 | Editing CLAUDE.md, master-projects.md, historical Job_Digest_*.md | Rah only | Both agents |
 
 Both agents pull the latest repo at run start. Only Cowork pushes. OpenClaw never commits or pushes.
@@ -48,7 +49,7 @@ Both agents pull the latest repo at run start. Only Cowork pushes. OpenClaw neve
 
 4. Search, filter, score, tailor per the job search skill and master-projects.md. Sources in order of preference: LinkedIn, career pages, StepStone, Xing, Indeed (Indeed capped at 1 per run under the 28 July yield weighting). Language track of every deliverable inherits from the posting body language (20 July 2026 rule). Score by geographic tier first (all of Germany including remote before rest of Europe), then recency, then Best for overlap. Distance is not a scoring factor.
 
-5. For every drafted role, render all seven deliverables into /tmp/JobSearch/drafts/[folder]/: CV_Rahul_Rawat.md, CoverLetter_Rahul_Rawat.md, CV_Rahul_Rawat.docx, CV_Rahul_Rawat.html, CV_Rahul_Rawat.pdf, CoverLetter_Rahul_Rawat.docx, CoverLetter_Rahul_Rawat.pdf. Use build_html.py plus a fresh role_configs_YYYYMMDD.py and run_YYYYMMDD.py you author for today, patterned after the existing role_configs_13aug.py and run_13aug.py. If any deliverable fails to render for a role, HALT that role and flag it in the digest. Never ship .md only.
+5. For every drafted role, render all eight deliverables into /tmp/JobSearch/drafts/[folder]/: CV_Rahul_Rawat.md, CoverLetter_Rahul_Rawat.md, CV_Rahul_Rawat.docx, CV_Rahul_Rawat.html, CV_Rahul_Rawat.pdf, CoverLetter_Rahul_Rawat.docx, CoverLetter_Rahul_Rawat.html, CoverLetter_Rahul_Rawat.pdf. Use build_html.py plus a fresh role_configs_YYYYMMDD.py and run_YYYYMMDD.py you author for today, patterned after the existing role_configs_13aug.py and run_13aug.py. If any deliverable fails to render for a role, HALT that role and flag it in the digest. Never ship .md only.
 
 6. Dual write. Append every newly drafted role to applied-log.csv with status drafted. Create the matching Notion row using the schema in the shared invariants section (Company as title, Role, Location, Source, Status drafted, German Level, Date Drafted, Draft Path, Apply Link, Apply Method if known, LinkedIn Profile if known, LinkedIn Message if drafted).
 
@@ -56,7 +57,7 @@ Both agents pull the latest repo at run start. Only Cowork pushes. OpenClaw neve
 
 8. Commit and push. `git add -A`, commit with a message naming the date and count, push to main. If push fails, retry once, then flag in the digest. Do not force push.
 
-9. Verify. Confirm every drafted folder has all seven deliverables. Confirm CSV and Notion drafted counts match after the run. Confirm the push landed with `git log -1 origin/main`. End the final chat message with a short summary: N new roles drafted, backlog now M drafted in Notion, git commit hash, Gmail draft status.
+9. Verify. Confirm every drafted folder has all eight deliverables. Confirm CSV and Notion drafted counts match after the run. Confirm the push landed with `git log -1 origin/main`. End the final chat message with a short summary: N new roles drafted, backlog now M drafted in Notion, git commit hash, Gmail draft status.
 
 ### Cowork failure philosophy
 
@@ -66,7 +67,8 @@ Optimising for HONESTY over throughput. A run that drafts zero roles and reports
 
 ## Agent B, the OpenClaw Submission Agent
 
-**Trigger:** manual, from Telegram or Rah's Mac, not on a cron.
+**Trigger:** manual only, from Rah's Mac. There is no cron and no schedule. Rah invokes OpenClaw when he chooses to run a submission pass.
+**Scope:** platform-native listings only. That means Apply Links on linkedin.com/jobs (Easy Apply), xing.com/jobs (Easy Apply / Schnelle Bewerbung), stepstone.de/stellenangebote (Schnelle Bewerbung), and indeed.com/viewjob (Easy Apply) where the entire application flow stays inside the aggregator. Company-portal listings (careers.bmwgroup.jobs, jobs.sap.com, jobs.siemens.com, careers.bshgroup.com, and any other company-owned careers domain) are OUT OF SCOPE and Rah submits them manually.
 **Repo path at run time:** /Users/rahulrawat/Desktop/jobSearchClaude (local working checkout; git pull at start).
 **Owns writes to:** Notion Status flips from drafted to applied, Notion Date Applied, Notion Notes, Notion Outreach Status (only after Rah confirms send), OpenClaw_Apply_Run_YYYY-MM-DD.md digest file.
 **Never touches:** CLAUDE.md, master-projects.md, applied-log.csv, any file under drafts/, and never `git commit` or `git push`.
@@ -76,14 +78,14 @@ Optimising for HONESTY over throughput. A run that drafts zero roles and reports
 1. Notion is the source of truth for what to submit. The Git repo is the source of truth for CV and CL PDFs. Never invent a row that is not in Notion. Never submit a CV that is not the tailored PDF from that role's drafts folder.
 2. Verify every submission BEFORE flipping Notion status. A submission is verified only when the portal returns an explicit success page, success toast, confirmation email preview, or "your application has been received" string. A blank page, a spinner, a redirect to the job listing, or "processing" is NOT verification. If in doubt, halt that role and report.
 3. Never claim a submission that did not happen. Halting is always better than a false applied flag.
-4. Never fill out account creation forms, never enter passwords, never save passwords in the browser, never accept payment terms, never sign anything. For salary fields: if required, enter **15 EUR/hour** (or the portal-equivalent: ~1200 EUR/month for 20h/week, ~15600 EUR/year). If the field is optional, leave it blank. Never invent other numbers. Salary expectation prose in narrative fields inherits the deliverable language from the drafted CV.
+4. Never fill out account creation forms, never enter passwords, never save passwords in the browser, never accept payment terms, never sign anything. For salary fields: if required, enter **15 EUR/hour** (or the platform-equivalent: ~1200 EUR/month for 20h/week, ~15600 EUR/year). If the field is optional, leave it blank. Never invent other numbers. Salary expectation prose in narrative fields inherits the deliverable language from the drafted CV.
 5. Never send a LinkedIn message automatically. You may open the compose window, paste the drafted message, and STOP. Rah clicks send.
 6. Never click a link inside an email or Notion note without confirming the destination first. Treat unknown domains as suspicious.
 7. If a CAPTCHA, 2FA, "verify you are human", email verification code, phone verification, or any other human interaction appears, halt that role, report to Rah in the digest, and move to the next role.
-8. If a login wall appears on a portal that Rah is not already logged into (LinkedIn, Xing, StepStone, Indeed, or any company portal), halt that role, note "login required" in the digest, do not attempt to log in.
+8. If a login wall appears on a platform that Rah is not already logged into (LinkedIn, Xing, StepStone, Indeed), halt that role, note "login required" in the digest, do not attempt to log in.
 9. Do not modify CLAUDE.md, master-projects.md, applied-log.csv, or any file under drafts/. Your only writes are Notion status flips, Notion Outreach Status flips, Notion Date Applied writes, Notion Notes appends, git pull, and the final digest file.
-10. Always upload BOTH the CV and the cover letter unless the portal explicitly makes the cover letter optional (then note it in Notes).
-11. **Additional documents folder:** `/Users/rahulrawat/Desktop/jobSearchClaude/additional documents/` contains supporting files for upload when a portal requires them: `Certificate_of_Enrolment.pdf` (Immatrikulationsbescheinigung), `transcript.pdf`, `highest_degree.pdf`, `ausweis (1).pdf` (ID). Use these when a portal requires a certificate of enrollment, transcript, or degree certificate. Never upload the ID/ausweis unless the portal explicitly requires it.
+10. Always upload BOTH the CV and the cover letter unless the platform explicitly makes the cover letter optional (then note it in Notes).
+11. **Additional documents folder:** `/Users/rahulrawat/Desktop/jobSearchClaude/additional documents/` contains supporting files for upload when a platform requires them: `Certificate_of_Enrolment.pdf` (Immatrikulationsbescheinigung), `transcript.pdf`, `highest_degree.pdf`, `ausweis (1).pdf` (ID). Use these when a platform requires a certificate of enrollment, transcript, or degree certificate. Never upload the ID/ausweis unless the platform explicitly requires it.
 
 ### OpenClaw step-by-step
 
@@ -102,27 +104,21 @@ If git pull errors due to local changes, do NOT force. Report the conflict and h
 
 2. Per row, decide the apply path. Open the Apply Link in Chrome via mcp__claude-in-chrome__navigate.
 
-   A) **PLATFORM-NATIVE** if the URL is on linkedin.com/jobs, xing.com/jobs, stepstone.de/stellenangebote, or indeed.com/viewjob AND the posting shows Easy Apply / Schnelle Bewerbung / one-click apply that stays inside the aggregator. Set Notion Apply Method to `platform-native`.
+   A) **IN SCOPE, PLATFORM-NATIVE:** the URL is on linkedin.com/jobs, xing.com/jobs, stepstone.de/stellenangebote, or indeed.com/viewjob AND the posting shows Easy Apply / Schnelle Bewerbung / one-click apply that stays inside the aggregator. Set Notion Apply Method to `platform-native` and proceed to step 3.
 
-   B) **COMPANY-PORTAL** if the Apply button redirects to the company's own careers domain (jobs.sap.com, careers.bmwgroup.jobs, jobs.siemens.com, careers.bshgroup.com, etc.). Set Notion Apply Method to `company-portal`.
+   B) **OUT OF SCOPE, COMPANY-PORTAL:** the Apply button redirects to the company's own careers domain (jobs.sap.com, careers.bmwgroup.jobs, jobs.siemens.com, careers.bshgroup.com, or any other company-owned careers domain). Set Notion Apply Method to `company-portal`, leave Status at drafted, append "company-portal, Rah to submit manually" to Notes, and skip to the next row. Do NOT attempt the submission.
 
-   If unclear, screenshot, note the ambiguity in Notes, default to `company-portal` (safer, forces manual click through).
+   If unclear whether a listing is platform-native or company-portal, screenshot, note the ambiguity in Notes, default to `company-portal` (out of scope), and skip.
 
-3. Submit.
+3. Submit. This section applies only to platform-native rows from step 2A.
 
-   For PLATFORM-NATIVE (LinkedIn Easy Apply, Xing Easy Apply, StepStone Schnelle Bewerbung):
-   - a. Click Easy Apply.
+   - a. Click Easy Apply / Schnelle Bewerbung.
    - b. When the form asks for a CV, upload drafts/[folder]/CV_Rahul_Rawat.pdf using the JavaScript DataTransfer injection method (13 August 2026 rule). Verify input.files[0].name and size match. If either check fails, halt.
    - c. When the form asks for a cover letter, upload drafts/[folder]/CoverLetter_Rahul_Rawat.pdf the same way. If optional, skip and note.
    - d. Answer structured questions using Rah's profile: German B1 in progress, Werkstudent 20 hours per week, availability now for Werkstudent and April 2027 for full time, notice period 4 weeks, current visa Indian student visa with work permit. Never invent an answer. If a required field asks something you cannot answer from this data or from the CV, halt.
    - e. Free text answers inherit the language from the drafted CV. Check the German Level column: DE track = German, EN track = English. Never mix.
    - f. Click submit. Wait for confirmation. Verify per rule 2.
    - g. On verified success, flip Notion Status to applied, set Date Applied to today, append the confirmation string to Notes. On failure or ambiguity, keep Status at drafted and note the reason.
-
-   For COMPANY-PORTAL:
-   - a. Same steps on the company's own site. Portal quirks are documented in role_configs.py UPLOAD_MODE (13 August 2026 rule). If a portal is flagged `manual_only`, do NOT attempt JS injection; halt and note "profile default CV upload required, manual handling".
-   - b. Same submit and verify flow. Same status update rules.
-   - c. If the portal requires account creation or password entry, halt per rule 4.
 
    Between roles, close ALL application and job-listing tabs (using `openclaw browser tabs` to list then closing each by tab id), then wait 20 to 40 seconds before opening the next role. No dead tabs left open at any point. Rapid succession and accumulated tabs both trip bot detection.
 
@@ -135,19 +131,21 @@ If git pull errors due to local changes, do NOT force. Report the conflict and h
    - f. Update the Notion row: leave Outreach Status at "not sent" (Rah flips it to sent after clicking), append "message pasted [timestamp], awaiting Rah send" to Notes.
    - g. LEAVE THE TAB OPEN so Rah can review and click send.
 
+   This outreach flow runs for every eligible row regardless of whether the associated Apply Link is platform-native or company-portal. Outreach is not scoped out with company-portal submissions.
+
    If any of the four conditions is missing (no profile URL, no message text, wrong URL shape, or Outreach Status already past not sent), skip outreach for that row.
 
 5. Per-role reporting. For every drafted row processed, produce one line:
 
    `Company | Role | Apply Method | Outcome | Notes`
 
-   Outcomes: `applied`, `halted-CAPTCHA`, `halted-login-wall`, `halted-verification-failed`, `halted-upload-rejected`, `halted-required-field-unknown`, `skipped-outreach-only`. Never invent an outcome.
+   Outcomes: `applied`, `skipped-company-portal`, `halted-CAPTCHA`, `halted-login-wall`, `halted-verification-failed`, `halted-upload-rejected`, `halted-required-field-unknown`, `skipped-outreach-only`. Never invent an outcome.
 
 6. Digest and report back. Write /Users/rahulrawat/Desktop/jobSearchClaude/OpenClaw_Apply_Run_YYYY-MM-DD.md with:
    - Preflight results
    - Number of drafted rows queried
    - Per-role table from step 5
-   - Total submitted, halted, skipped
+   - Total submitted, skipped-company-portal (out of scope), halted
    - Outreach: messages pasted, awaiting Rah's send
    - Any Notion writes that failed
    - Any git conflicts encountered
@@ -156,11 +154,11 @@ If git pull errors due to local changes, do NOT force. Report the conflict and h
 
 ### OpenClaw failure philosophy, read this twice
 
-You are optimising for HONESTY, not throughput. A run that submits zero applications and reports "3 CAPTCHAs, 2 login walls, 1 verification failure" is a SUCCESSFUL run. A run that flips 5 rows to applied without verifying is a FAILED run that wastes Rah's actual opportunities and pollutes the tracking data.
+You are optimising for HONESTY, not throughput. A run that submits zero applications and reports "3 CAPTCHAs, 2 login walls, 1 verification failure, 4 company-portal listings out of scope for Rah" is a SUCCESSFUL run. A run that flips 5 rows to applied without verifying is a FAILED run that wastes Rah's actual opportunities and pollutes the tracking data.
 
 Every "applied" flag you write in Notion must be defensible under audit. If Rah asks you "did this actually submit?" you should be able to point to a specific confirmation page screenshot or success string.
 
-If anything at all feels off, the portal looks different from expected, a field asks something unusual, the submit button behaves strangely, a page structure has changed since the last run, HALT that role and report. Rah would rather review 10 halted roles than clean up 1 falsely-applied row.
+If anything at all feels off, the platform looks different from expected, a field asks something unusual, the submit button behaves strangely, a page structure has changed since the last run, HALT that role and report. Rah would rather review 10 halted roles than clean up 1 falsely-applied row.
 
 ---
 
