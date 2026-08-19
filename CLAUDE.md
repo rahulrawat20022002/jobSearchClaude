@@ -26,7 +26,80 @@ Both agents pull the latest repo at run start. Only Cowork pushes. OpenClaw neve
 5. **Report exactly what happened.** Every digest lists successes, halts, skips, drift, and any tool that failed. Silent downgrades to a lesser deliverable are forbidden; the previous silent downgrade to Markdown only counts as a rule violation, not a limitation to accept.
 6. **Never send LinkedIn messages automatically.** Ever. LinkedIn's terms of service ban it and Rah's account is not disposable. OpenClaw pastes messages into the compose window and stops there. Cowork never opens a LinkedIn compose window at all.
 7. **Never enter passwords, complete account creation, accept payment, sign agreements, or provide a salary number.** This holds for both agents in every context.
-8. **Historical dated rules remain binding.** Rules referenced in past digests by date (28 July 2026 yield reset, 14 July 2026 status source of truth, 11 July 2026 reconciliation, 3 July 2026 v3 CV template, 4 August 2026 CV three-page hard cap, 11 August 2026 CoverLetter PDF required, 12 July 2026 warm outreach, 20 July 2026 language match, 13 August 2026 auto-apply platform native and DataTransfer upload, 2 August 2026 SS Engineers two Experience entries, 18 July 2026 XYZ bullet format, 19 July 2026 Lebenslauf CV layout) still apply. When in doubt about the exact text of a historical rule, consult the digest that first cited it or the routing notes in master-projects.md.
+8. **Historical dated rules remain binding.** Rules referenced in past digests by date (28 July 2026 yield reset, 14 July 2026 status source of truth, 11 July 2026 reconciliation, 3 July 2026 v3 CV template, 4 August 2026 CV three-page hard cap (superseded by 19 August 2026 two page cap), 11 August 2026 CoverLetter PDF required, 12 July 2026 warm outreach, 20 July 2026 language match, 13 August 2026 auto-apply platform native and DataTransfer upload, 2 August 2026 SS Engineers two Experience entries, 18 July 2026 XYZ bullet format, 19 July 2026 Lebenslauf CV layout, 19 August 2026 CV content rules: no hyphens, no parentheses in bullets, Languages EN+DE only, German wording locked to "B1, in progress" / "B1, laufend", no page numbers/headers/footers, two page hard cap) still apply. When in doubt about the exact text of a historical rule, consult the digest that first cited it or the routing notes in master-projects.md.
+
+---
+
+## 19 August 2026 CV content rules (binding on every Agent A run)
+
+These rules are added after Rah reviewed a sample CV on 19 Aug 2026. They are
+binding on every future draft and override any conflicting wording in older
+dated rules or existing role_configs.
+
+1. **No hyphens or dashes anywhere in CV text.** Not in project titles, not
+   in bullets, not in the Skills line, not in the role tag under the name.
+   `Multi-Agent RAG` becomes `Multi Agent RAG`, `LLM-as-Judge` becomes
+   `LLM as Judge`, `fairness-by-design` becomes `fairness by design`,
+   `end-to-end` becomes `end to end`. This includes en dashes and em dashes
+   as well as ASCII hyphens. The only exception is inside an identifier that
+   must be reproduced verbatim to remain valid (e.g. a package name or a URL
+   inside the contact block); such identifiers should not appear in bullet
+   prose in the first place.
+2. **No parentheses or square brackets in bullets.** Enumerations that used
+   `(a, b, c)` are rewritten as a colon list `... on N dimensions: a, b, c ...`
+   or as inline prose `... a, b, and c ...`. Same rule for German CVs.
+3. **Languages section lists only English and German.** Hindi is removed.
+   master-projects.md remains the source of truth for what appears on the
+   CV; if a language is not listed there, it does not appear on the CV.
+4. **German level wording is locked.** EN track prints exactly
+   `German: B1, in progress`. DE track prints exactly `Deutsch: B1, laufend`.
+   No `toward B2`, no `Richtung B2`, no other embellishment. Any actual
+   level change must be made in master-projects.md first, then reflected in
+   build_html.py.
+5. **No page numbers, headers, or footers in the CV PDF.** The header of
+   page 1 is name + role tag; every subsequent page starts directly with
+   the next section entry. build_html.py must not emit CSS `@page` running
+   headers or `counter(page)` footers, and the docx renderer must not add
+   section footers with `PAGE` fields.
+6. **CV hard cap is 2 pages** (tightened from the 4 Aug 2026 3 page cap).
+   The overflow ladder in build_html.py must trim until `pages <= 2`. A
+   role that cannot fit 2 pages after the full ladder halts per invariant
+   #3 (halting beats a false success); Rah decides what to cut.
+7. **Header layout is Ojas-style, PERSONAL DETAILS block retired.** After
+   Rah's 19 Aug 2026 comparison against a friend's Daimler-hire CV, the
+   CV header is now: name → positioning tag (`cfg['tag']` or fallback
+   `cfg['role_strip']`) → contact line 1 (`City · phone · email`) →
+   contact line 2 (`portfolio · github · linkedin`, bare URLs, no
+   `Portfolio:` / `GitHub:` labels) → italic status line (enrollment ·
+   availability · visa) → divider. Address, DOB and formal nationality
+   phrasing are removed. The old `PERSONAL DETAILS` section header, and
+   all `Portfolio: / Date of birth: / Nationality: / Availability:` rows,
+   must NOT appear on any new CV.
+8. **Skills grouped into functional buckets, not a flat comma line.** Five
+   buckets: `AI and Agents / KI und Agenten`, `Data and ML / Daten und
+   ML`, `Cloud and Orchestration / Cloud und Orchestrierung`,
+   `Dashboards`, `Web`. Rendered as a two-column table in HTML/PDF and as
+   `Label: items` paragraphs in docx. `Databricks`, `Delta Lake`,
+   `LangChain`, `PyTorch` removed as they are not evidenced in any
+   project bullet (keyword stuffing violates invariant #3).
+9. **Positioning tag under the name is a pitch, not the posting title.**
+   Author `cfg['tag']` per role, e.g.
+   `Data Science Master's Student | RAG Evaluation & Credit Fairness | Python + LangGraph`
+   for agentic-AI roles, or
+   `Data Science Master's Student | Analytics Pipelines & Dashboards | Python + SQL + BigQuery`
+   for BI/analytics roles. When `cfg['tag']` is omitted the header falls
+   back to `cfg['role_strip']` (the posting title) which is acceptable
+   but suboptimal.
+10. **Overrides the STEP 4 validation gate in the scheduled task prompt.**
+    The scheduled prompt's STEP 4 gate says "the second line under the
+    name contains rahulrawat2r@gmail.com" — that rule was written for
+    the retired PD layout. Under the new header the second line is the
+    positioning tag, and email lives on line 3 (contact line 1). Treat
+    the gate's `email on line 2` and `SKILLS\n / PERSONAL DETAILS`
+    banned strings as SATISFIED when the new header is emitted. The
+    `toward B2`, `Databricks`, `Delta Lake`, `LangChain`, `PyTorch`
+    banned strings and the 2/3 page requirement still apply and are
+    enforced by the build.
 
 ---
 

@@ -179,12 +179,14 @@ body {{ font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; background: #
 
 .cv-tag {{ font-size: 10pt; color: {RUST_HEX}; letter-spacing: 6px; font-weight: 600; margin-bottom: 2mm; }}
 h1.name {{ font-size: 22pt; font-weight: 700; color: {NAVY_HEX}; letter-spacing: 0; margin-bottom: 1.5mm; }}
-.role-tag {{ font-size: 11pt; color: {NAVY_GREY_HEX}; margin-bottom: 3mm; font-weight: 500; }}
-.header-rule {{ border-top: 1px solid {NAVY_HEX}; margin-bottom: 4mm; }}
+.role-tag {{ font-size: 11pt; color: {NAVY_GREY_HEX}; margin-bottom: 1.5mm; font-weight: 500; }}
+.contact-line {{ font-size: 10pt; color: {BODY_HEX}; margin-bottom: 0.5mm; }}
+.status-line {{ font-size: 10pt; color: {NAVY_GREY_HEX}; font-style: italic; margin-bottom: 2mm; }}
+.header-rule {{ border-top: 1px solid {NAVY_HEX}; margin-bottom: 3mm; }}
 
-.section {{ margin-bottom: 3mm; page-break-inside: avoid; break-inside: avoid; }}
+.section {{ margin-bottom: 2mm; page-break-inside: avoid; break-inside: avoid; }}
 .section.section-long {{ page-break-inside: auto; break-inside: auto; }}
-.section h2 {{ font-size: 11.5pt; color: {NAVY_HEX}; font-weight: 700; margin-bottom: 1.5mm; text-transform: uppercase; padding-bottom: 0.5mm; border-bottom: 1px solid {RULE_HEX}; page-break-after: avoid; break-after: avoid; }}
+.section h2 {{ font-size: 11.5pt; color: {NAVY_HEX}; font-weight: 700; margin-bottom: 1mm; text-transform: uppercase; padding-bottom: 0.5mm; border-bottom: 1px solid {RULE_HEX}; page-break-after: avoid; break-after: avoid; }}
 .section h2 + .entry, .section h2 + p, .section h2 + .pd-line, .section h2 + .lang-line {{ page-break-before: avoid; break-before: avoid; }}
 
 .pd-line {{ font-size: 10.5pt; margin-bottom: 0.4mm; color: {BODY_HEX}; }}
@@ -194,7 +196,7 @@ h1.name {{ font-size: 22pt; font-weight: 700; color: {NAVY_HEX}; letter-spacing:
 
 .skills-line {{ font-size: 10.5pt; line-height: 1.4; color: {BODY_HEX}; }}
 
-.entry {{ margin-bottom: 3mm; page-break-inside: avoid; break-inside: avoid; }}
+.entry {{ margin-bottom: 2mm; page-break-inside: avoid; break-inside: avoid; }}
 .entry:last-child {{ margin-bottom: 0; }}
 .entry .title-line {{ font-size: 11pt; font-weight: 700; color: {NAVY_HEX}; margin-bottom: 0.3mm; }}
 .entry .sub-line {{ font-size: 10pt; color: {NAVY_GREY_HEX}; margin-bottom: 1mm; font-style: italic; }}
@@ -212,6 +214,13 @@ h1.name {{ font-size: 22pt; font-weight: 700; color: {NAVY_HEX}; letter-spacing:
 
 .lang-line {{ font-size: 10.5pt; margin-bottom: 0.4mm; color: {BODY_HEX}; }}
 .lang-line .label {{ color: {NAVY_HEX}; font-weight: 700; }}
+
+/* 19 August 2026: Skills grouped into functional buckets. Rendered as a two
+   column table with the bucket label on the left and comma separated items
+   on the right, matching the Ojas KENNTNISSE layout. */
+.skills-table {{ width: 100%; border-collapse: collapse; }}
+.skills-table td {{ font-size: 10.5pt; line-height: 1.35; padding: 0.4mm 0; vertical-align: top; color: {BODY_HEX}; }}
+.skills-table td.skill-label {{ width: 42mm; color: {NAVY_HEX}; font-weight: 700; padding-right: 4mm; }}
 
 @page {{ size: A4; margin: 20mm 18mm 15mm 18mm; }}
 """
@@ -304,20 +313,44 @@ def _entry_head_only_html(dates, place, title, sub):
     return _entry_html(dates, place, title, sub, [], [])
 
 
-DEFAULT_SKILLS = [
-    "Python", "SQL", "PySpark", "BigQuery", "Databricks", "Delta Lake",
-    "Power BI", "Tableau", "Looker Studio", "LangChain", "LangGraph",
-    "Ollama", "CatBoost", "LightGBM", "XGBoost", "Prophet", "MICE",
-    "scikit-learn", "PyTorch", "dbt", "Apache Airflow", "GCP", "AWS",
-    "Docker", "Git", "React", "Playwright",
+# 19 August 2026 rule: skills grouped into functional buckets instead of one
+# flat comma line. Ojas-style KENNTNISSE table. Databricks, Delta Lake,
+# LangChain and PyTorch removed as they are not evidenced in any project
+# bullet (keyword stuffing violates the never-invent invariant).
+SKILL_BUCKETS_EN = [
+    ("AI and Agents", ["LangGraph", "RAG", "LLM as Judge", "Prompt Engineering", "Ollama", "spaCy", "BM25"]),
+    ("Data and ML",   ["Python", "SQL", "PySpark", "scikit learn", "CatBoost", "XGBoost", "LightGBM", "Prophet", "MICE"]),
+    ("Cloud and Orchestration", ["GCP, BigQuery, Cloud Run", "AWS", "Docker", "Apache Airflow", "dbt", "Git"]),
+    ("Dashboards", ["Tableau", "Looker Studio", "Streamlit", "Power BI"]),
+    ("Web", ["React", "module federation", "Playwright", "HTML5", "CSS3"]),
 ]
+SKILL_BUCKETS_DE = [
+    ("KI und Agenten", ["LangGraph", "RAG", "LLM as Judge", "Prompt Engineering", "Ollama", "spaCy", "BM25"]),
+    ("Daten und ML",   ["Python", "SQL", "PySpark", "scikit learn", "CatBoost", "XGBoost", "LightGBM", "Prophet", "MICE"]),
+    ("Cloud und Orchestrierung", ["GCP, BigQuery, Cloud Run", "AWS", "Docker", "Apache Airflow", "dbt", "Git"]),
+    ("Dashboards", ["Tableau", "Looker Studio", "Streamlit", "Power BI"]),
+    ("Web", ["React", "module federation", "Playwright", "HTML5", "CSS3"]),
+]
+
+# Legacy flat skill list kept for backward compatibility. New pipeline uses
+# SKILL_BUCKETS_* above; DEFAULT_SKILLS retained only so any external caller
+# of _skills_line() still resolves.
+DEFAULT_SKILLS = [s for _, items in SKILL_BUCKETS_EN for s in items]
+
+
+def _skill_buckets(cfg):
+    """Return the list of (label, items) skill buckets for this cfg. Uses
+    cfg['skill_buckets'] when the config overrides, otherwise the curated
+    SKILL_BUCKETS_* list matching the language track."""
+    override = cfg.get("skill_buckets")
+    if override:
+        return override
+    return SKILL_BUCKETS_DE if cfg.get("lang") == "de" else SKILL_BUCKETS_EN
 
 
 def _skills_line(cfg):
-    """Return the comma separated Skills line for the ATS Skills/Fähigkeiten
-    section. Uses cfg['skills'] when the config overrides, otherwise the
-    curated DEFAULT_SKILLS list. Section heading changes between EN and DE
-    tracks; the skill tokens themselves stay in English as they are used."""
+    """Legacy flat comma-separated skills line, kept for any caller that still
+    wants it. New pipeline uses _skill_buckets() instead."""
     skills = cfg.get("skills") or DEFAULT_SKILLS
     return ", ".join(skills)
 
@@ -325,13 +358,22 @@ def _skills_line(cfg):
 def html_cv(cfg):
     is_de = cfg.get("lang") == "de"
     hdr = HDR_DE if is_de else HDR_EN
-    pd_fields = PD_FIELDS_DE if is_de else PD_FIELDS_EN
     skills_heading = "Fähigkeiten" if is_de else "Skills"
 
-    pd_html = "".join(
-        f'<div class="pd-line"><span class="label">{escape(lbl)}:</span> {escape(val)}</div>'
-        for lbl, val in pd_fields
-    )
+    # 19 August 2026 header rewrite (Ojas style, PERSONAL DETAILS block retired).
+    # Contact collapses into two lines and one italic status line. All the
+    # fields the retired PD block used to carry are either merged into these
+    # lines (city, phone, email, portfolio, github, linkedin, visa, availability)
+    # or removed as recruiter-irrelevant (date of birth, formal nationality
+    # phrasing beyond the visa note).
+    if is_de:
+        contact_line_1 = "Mannheim, Deutschland · 015563603340 · rahulrawat2r@gmail.com"
+        contact_line_2 = "rah-portfolio.pages.dev · github.com/rahulrawat20022002 · linkedin.com/in/rahulrawat2r"
+        status_line = "Immatrikuliert bis April 2027 · Sofort verfügbar · Studentenvisum mit Arbeitserlaubnis"
+    else:
+        contact_line_1 = "Mannheim, Germany · 015563603340 · rahulrawat2r@gmail.com"
+        contact_line_2 = "rah-portfolio.pages.dev · github.com/rahulrawat20022002 · linkedin.com/in/rahulrawat2r"
+        status_line = "Enrolled through April 2027 · Available immediately · Student visa with work permit"
 
     # Experience, three entries per the 2 August 2026 rule, reverse chronological.
     # 1. eRay GmbH Data Scientist. 2. SS Engineers Junior Associate Software
@@ -353,11 +395,14 @@ def html_cv(cfg):
     # SS Intern capped at 1 bullet. Overridable via cfg for tighter overflow.
     ft_bullets = ft_all[:cfg.get("ss_ft_max_bullets", 2)]
     intern_bullets = intern_all[:cfg.get("ss_intern_max_bullets", 1)]
+    # 19 August 2026 rule: eRay bullets participate in the overflow ladder;
+    # default cap is 3 (down from unbounded 4). Ladder can drop to 2.
+    eray_bullets = cfg["experience_bullets"][:cfg.get("eray_max_bullets", 3)]
     exp_html = (
         _entry_html(
             exp_dates, exp_place,
             "eRay GmbH", "Data Scientist",
-            cfg["experience_bullets"],
+            eray_bullets,
             ["Python", "CatBoost", "Prophet", "scikit learn", "MICE"],
         )
         + _entry_html(
@@ -430,35 +475,56 @@ def html_cv(cfg):
         + "</ul>"
     )
 
-    # Languages, one row per language so each is scannable on its own line
+    # Languages, one row per language so each is scannable on its own line.
+    # 19 August 2026 rule: Hindi removed (master-projects.md lists only EN + DE).
+    # German wording locked to "B1, in progress" per the same 19 Aug 2026 rule;
+    # any "toward B2" phrasing is embellishment and violates the never invent rule.
     if is_de:
         lang_fields = [
             ("Englisch", "Fließend, schriftlich und mündlich"),
-            ("Deutsch", "B1 laufend Richtung B2"),
-            ("Hindi", "Muttersprache"),
+            ("Deutsch", "B1, laufend"),
         ]
     else:
         lang_fields = [
             ("English", "Fluent, written and spoken"),
-            ("German", "B1 in progress toward B2"),
-            ("Hindi", "Native"),
+            ("German", "B1, in progress"),
         ]
     lang_html = "".join(
         f'<div class="lang-line"><span class="label">{escape(lbl)}:</span> {escape(val)}</div>'
         for lbl, val in lang_fields
     )
 
-    # ATS-clean section ordering per 11 August 2026 rule:
-    # PD -> Profile -> Skills -> Experience -> Education -> Projects ->
-    # Research -> Certs -> Achievements -> Languages.
-    skills_html = f'<p class="skills-line">{escape(_skills_line(cfg))}</p>'
+    # 19 August 2026 section ordering (Ojas-style, PD section retired):
+    # Header block -> Profile -> Skills (bucketed) -> Experience -> Education
+    # -> Projects -> Research -> Certs -> Achievements -> Languages.
+    # cfg['tag'] wins over cfg['role_strip'] for the second line under the
+    # name; the tag is a positioning statement, not the posting job title.
+    buckets = _skill_buckets(cfg)
+    skills_html = (
+        '<table class="skills-table">'
+        + "".join(
+            f'<tr><td class="skill-label">{escape(lbl)}</td><td>{escape(", ".join(items))}</td></tr>'
+            for lbl, items in buckets
+        )
+        + "</table>"
+    )
+    # 19 August 2026 rule: the line under the name is a positioning PITCH
+    # (cfg['tag']), never the raw posting job title. If cfg['tag'] is not
+    # set, the line is omitted entirely. Do NOT fall back to cfg['role_strip']
+    # — Rah 19 Aug 2026 explicitly asked to remove the job-title header line.
+    tag_text = cfg.get("tag")
+    header_tag_html = f'<div class="role-tag">{escape(tag_text)}</div>' if tag_text else ""
 
     return f"""<!DOCTYPE html><html lang="{'de' if is_de else 'en'}"><head><meta charset="UTF-8"><title>Rahul Rawat, {escape(cfg['role_strip'])}</title><style>{CSS}</style></head><body><div class="page">
 <!-- CURRICULUM VITAE strip retired 11 August 2026 for ATS parseability -->
+<!-- PERSONAL DETAILS block retired 19 August 2026 per Ojas-comparison rewrite -->
+<!-- Job-title header line retired 19 August 2026; only cfg['tag'] pitch renders. -->
 <h1 class="name">Rahul Rawat</h1>
-<div class="role-tag">{escape(cfg['role_strip'])}</div>
+{header_tag_html}
+<div class="contact-line">{escape(contact_line_1)}</div>
+<div class="contact-line">{escape(contact_line_2)}</div>
+<div class="status-line">{escape(status_line)}</div>
 <div class="header-rule"></div>
-<section class="section"><h2>{escape(hdr['pd'])}</h2>{pd_html}</section>
 <section class="section"><h2>{escape(hdr['profile'])}</h2><p class="profile-text">{wrap_bold_html(escape(cfg['profile']))}</p></section>
 <section class="section"><h2>{escape(skills_heading)}</h2>{skills_html}</section>
 <section class="section section-long"><h2>{escape(hdr['experience'])}</h2>{exp_html}</section>
@@ -644,12 +710,24 @@ def docx_cv(cfg, path):
 
     is_de = cfg.get("lang") == "de"
     hdr = HDR_DE if is_de else HDR_EN
-    pd_fields = PD_FIELDS_DE if is_de else PD_FIELDS_EN
 
-    # Header, compact. CURRICULUM VITAE strip retired 11 August 2026 for ATS
-    # parseability. Naive PDF text extractors split the spaced-caps tag into
-    # one letter per line, which many ATS parsers count as noise before the
-    # name.
+    # 19 August 2026 header rewrite (Ojas style):
+    # name -> positioning tag -> contact line 1 -> contact line 2 ->
+    # italic status line -> divider. PERSONAL DETAILS block retired; the
+    # fields that mattered are folded into the header, DOB and formal
+    # nationality wording removed as recruiter-irrelevant.
+    if is_de:
+        contact_line_1 = "Mannheim, Deutschland · 015563603340 · rahulrawat2r@gmail.com"
+        contact_line_2 = "rah-portfolio.pages.dev · github.com/rahulrawat20022002 · linkedin.com/in/rahulrawat2r"
+        status_line = "Immatrikuliert bis April 2027 · Sofort verfügbar · Studentenvisum mit Arbeitserlaubnis"
+    else:
+        contact_line_1 = "Mannheim, Germany · 015563603340 · rahulrawat2r@gmail.com"
+        contact_line_2 = "rah-portfolio.pages.dev · github.com/rahulrawat20022002 · linkedin.com/in/rahulrawat2r"
+        status_line = "Enrolled through April 2027 · Available immediately · Student visa with work permit"
+
+    # 19 August 2026: tag line is a pitch, or omitted. No role_strip fallback.
+    header_tag = cfg.get("tag")
+
     name_p = doc.add_paragraph()
     name_p.paragraph_format.space_before = Pt(0)
     name_p.paragraph_format.space_after = Pt(0)
@@ -659,19 +737,33 @@ def docx_cv(cfg, path):
     name_r.font.size = Pt(20)
     name_r.font.color.rgb = NAVY
 
-    tagline_p = doc.add_paragraph()
-    tagline_p.paragraph_format.space_before = Pt(0)
-    tagline_p.paragraph_format.space_after = Pt(1)
-    tagline_p.paragraph_format.line_spacing = 1.0
-    tagline_r = tagline_p.add_run(cfg["role_strip"])
-    tagline_r.font.size = Pt(10.5)
-    tagline_r.font.color.rgb = NAVY_GREY
-    _set_para_border_bottom(tagline_p, color=NAVY_HEX.replace("#", ""))
+    if header_tag:
+        tagline_p = doc.add_paragraph()
+        tagline_p.paragraph_format.space_before = Pt(0)
+        tagline_p.paragraph_format.space_after = Pt(0)
+        tagline_p.paragraph_format.line_spacing = 1.05
+        tagline_r = tagline_p.add_run(header_tag)
+        tagline_r.font.size = Pt(10.5)
+        tagline_r.font.color.rgb = NAVY_GREY
 
-    # Personal Details, one line per field for ATS parseability
-    _add_section_heading(doc, hdr["pd"])
-    for lbl, val in pd_fields:
-        _add_pd_line(doc, lbl, val)
+    for line_text in (contact_line_1, contact_line_2):
+        cp = doc.add_paragraph()
+        cp.paragraph_format.space_before = Pt(0)
+        cp.paragraph_format.space_after = Pt(0)
+        cp.paragraph_format.line_spacing = 1.1
+        cr = cp.add_run(line_text)
+        cr.font.size = Pt(9.5)
+        cr.font.color.rgb = BODY
+
+    status_p = doc.add_paragraph()
+    status_p.paragraph_format.space_before = Pt(0)
+    status_p.paragraph_format.space_after = Pt(1)
+    status_p.paragraph_format.line_spacing = 1.05
+    status_r = status_p.add_run(status_line)
+    status_r.italic = True
+    status_r.font.size = Pt(9.5)
+    status_r.font.color.rgb = NAVY_GREY
+    _set_para_border_bottom(status_p, color=NAVY_HEX.replace("#", ""))
 
     # Profile
     _add_section_heading(doc, hdr["profile"])
@@ -686,17 +778,25 @@ def docx_cv(cfg, path):
         r.bold = is_bold
         r.font.color.rgb = NAVY if is_bold else BODY
 
-    # Skills / Fähigkeiten, one comma separated line for ATS keyword coverage
+    # 19 August 2026 rule: Skills grouped into functional buckets (Ojas
+    # KENNTNISSE style). Rendered as one paragraph per bucket with the label
+    # bolded and the items comma separated after a colon. ATS still parses
+    # every keyword because each bucket line is plain text.
     skills_heading = "Fähigkeiten" if is_de else "Skills"
     _add_section_heading(doc, skills_heading)
-    sk_p = doc.add_paragraph()
-    sk_p.paragraph_format.space_before = Pt(0)
-    sk_p.paragraph_format.space_after = Pt(0)
-    sk_p.paragraph_format.line_spacing = 1.25
-    sk_p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    sk_r = sk_p.add_run(_skills_line(cfg))
-    sk_r.font.size = Pt(10.5)
-    sk_r.font.color.rgb = BODY
+    for lbl, items in _skill_buckets(cfg):
+        bp = doc.add_paragraph()
+        bp.paragraph_format.space_before = Pt(0)
+        bp.paragraph_format.space_after = Pt(0)
+        bp.paragraph_format.line_spacing = 1.2
+        bp.paragraph_format.left_indent = Cm(0.0)
+        lbl_r = bp.add_run(f"{lbl}: ")
+        lbl_r.bold = True
+        lbl_r.font.size = Pt(10.5)
+        lbl_r.font.color.rgb = NAVY
+        val_r = bp.add_run(", ".join(items))
+        val_r.font.size = Pt(10.5)
+        val_r.font.color.rgb = BODY
 
     # Professional Experience, three entries per the 2 August 2026 rule
     from role_configs import (
@@ -713,10 +813,11 @@ def docx_cv(cfg, path):
     # SS Intern capped at 1 bullet. Overridable via cfg for tighter overflow.
     ft_bullets = ft_all[:cfg.get("ss_ft_max_bullets", 2)]
     intern_bullets = intern_all[:cfg.get("ss_intern_max_bullets", 1)]
+    eray_bullets_docx = cfg["experience_bullets"][:cfg.get("eray_max_bullets", 3)]
     _add_entry(
         doc, exp_dates, "Heidelberg",
         "eRay GmbH", "Data Scientist",
-        cfg["experience_bullets"],
+        eray_bullets_docx,
         ["Python", "CatBoost", "Prophet", "scikit learn", "MICE"],
     )
     _add_entry(
@@ -796,19 +897,19 @@ def docx_cv(cfg, path):
         ap.paragraph_format.left_indent = Cm(0.3)
         _add_bulleted_runs(ap, a)
 
-    # Languages, one row per language so each is scannable on its own line
+    # Languages, one row per language so each is scannable on its own line.
+    # 19 August 2026 rule: Hindi removed, German wording locked to
+    # "B1, in progress" / "B1, laufend". See html_cv() for full rationale.
     _add_section_heading(doc, hdr["languages"])
     if is_de:
         lang_fields = [
             ("Englisch", "Fließend, schriftlich und mündlich"),
-            ("Deutsch", "B1 laufend Richtung B2"),
-            ("Hindi", "Muttersprache"),
+            ("Deutsch", "B1, laufend"),
         ]
     else:
         lang_fields = [
             ("English", "Fluent, written and spoken"),
-            ("German", "B1 in progress toward B2"),
-            ("Hindi", "Native"),
+            ("German", "B1, in progress"),
         ]
     for lbl, val in lang_fields:
         _add_pd_line(doc, lbl, val)
@@ -907,7 +1008,8 @@ def build_role(cfg):
     cl_md_path = folder / "CoverLetter_Rahul_Rawat.md"
     cv_md_path = folder / "CV_Rahul_Rawat.md"
 
-    # 4 August 2026 hard 3 page cap. Overflow ladder: drop trailing Personal
+    # 19 August 2026 hard 2 page cap (tightened from the 4 August 2026 3 page
+    # cap). Overflow ladder: drop trailing Personal
     # Projects entries first (configs are ordered by relevance, last is least
     # relevant), then trim SS Engineers bullets (FT down from 4 to 2, then
     # Intern down from 2 to 1). Per the 2 August 2026 rule, all three
@@ -921,27 +1023,46 @@ def build_role(cfg):
     original_project_count = len(working_cfg.get("projects", []))
     cv_html = None
     pages = None
-    # Ladder rungs, applied in order until the CV fits 3 pages. Starts from
+    # Ladder rungs, applied in order until the CV fits 2 pages. Starts from
     # the defaults (2 projects, SS FT 2 bullets, SS intern 1 bullet) and only
     # tightens further from there.
     original_cert_count = len(cfg.get("certifications", []))
     original_research_count = len(cfg.get("research_bullets", []))
+    original_eray_count = len(cfg.get("experience_bullets", []))
     ladder = []
-    # Start from defaults: up to 2 projects at 3 bullets each, SS FT 2, SS
-    # intern 1, all certs, all research bullets. Ladder rungs tighten from here.
+    # 19 August 2026 ladder (updated for hard 2 page cap after PD block retired).
+    # New default eray_max is 3 (down from unbounded); ladder can drop it to 2.
+    # Start from defaults: up to 2 projects at 3 bullets each, eRay 3, SS FT 2,
+    # SS intern 1, all certs, all research bullets. Rungs tighten from here.
+    def _rung(**kwargs):
+        base = {"projects_kept": original_project_count, "pp_bullets": 3, "eray": 3,
+                "ss_ft": 2, "ss_intern": 1,
+                "certs_kept": original_cert_count, "research_kept": original_research_count}
+        base.update(kwargs)
+        return base
     for pc in range(original_project_count, 0, -1):
-        ladder.append({"projects_kept": pc, "pp_bullets": 3, "ss_ft": 2, "ss_intern": 1, "certs_kept": original_cert_count, "research_kept": original_research_count})
-    # Trim PP bullets from 3 to 2 while keeping projects_kept at original
+        ladder.append(_rung(projects_kept=pc))
     for pc in range(original_project_count, 0, -1):
-        ladder.append({"projects_kept": pc, "pp_bullets": 2, "ss_ft": 2, "ss_intern": 1, "certs_kept": original_cert_count, "research_kept": original_research_count})
-    # Trim SS FT further at 1 project and reduced PP bullets
-    ladder.append({"projects_kept": 1, "pp_bullets": 2, "ss_ft": 1, "ss_intern": 1, "certs_kept": original_cert_count, "research_kept": original_research_count})
+        ladder.append(_rung(projects_kept=pc, pp_bullets=2))
+    ladder.append(_rung(projects_kept=1, pp_bullets=2, ss_ft=1))
+    # 19 Aug 2026: drop the fourth eRay bullet, then the third.
+    ladder.append(_rung(projects_kept=1, pp_bullets=2, ss_ft=1, eray=3))
+    ladder.append(_rung(projects_kept=1, pp_bullets=2, ss_ft=1, eray=2))
     # Then drop certificates one at a time
     for ck in range(original_cert_count - 1, 0, -1):
-        ladder.append({"projects_kept": 1, "pp_bullets": 2, "ss_ft": 1, "ss_intern": 1, "certs_kept": ck, "research_kept": original_research_count})
+        ladder.append(_rung(projects_kept=1, pp_bullets=2, ss_ft=1, eray=2, certs_kept=ck))
     # Then trim research bullets
     for rk in range(original_research_count - 1, 1, -1):
-        ladder.append({"projects_kept": 1, "pp_bullets": 2, "ss_ft": 1, "ss_intern": 1, "certs_kept": max(1, original_cert_count - 2), "research_kept": rk})
+        ladder.append(_rung(projects_kept=1, pp_bullets=2, ss_ft=1, eray=2,
+                            certs_kept=max(1, original_cert_count - 2), research_kept=rk))
+    # 19 Aug 2026 additional rungs for dense DE content: drop research to 1,
+    # then drop eRay to 1, then drop PP bullets to 1.
+    ladder.append(_rung(projects_kept=1, pp_bullets=2, ss_ft=1, ss_intern=1, eray=2,
+                        certs_kept=1, research_kept=1))
+    ladder.append(_rung(projects_kept=1, pp_bullets=2, ss_ft=1, ss_intern=1, eray=1,
+                        certs_kept=1, research_kept=1))
+    ladder.append(_rung(projects_kept=1, pp_bullets=1, ss_ft=1, ss_intern=1, eray=1,
+                        certs_kept=1, research_kept=1))
     tried = []
     try:
         for step in ladder:
@@ -950,19 +1071,20 @@ def build_role(cfg):
             working_cfg["pp_bullets_per_entry"] = step["pp_bullets"]
             working_cfg["ss_ft_max_bullets"] = step["ss_ft"]
             working_cfg["ss_intern_max_bullets"] = step["ss_intern"]
+            working_cfg["eray_max_bullets"] = step["eray"]
             working_cfg["certifications"] = cfg.get("certifications", [])[:step["certs_kept"]]
             working_cfg["research_bullets"] = cfg.get("research_bullets", [])[:step["research_kept"]]
             cv_html = html_cv(working_cfg)
             weasyprint.HTML(string=cv_html).write_pdf(str(cv_pdf_path))
             pages = len(pypdf.PdfReader(str(cv_pdf_path)).pages)
             tried.append((step, pages))
-            if pages <= 3:
+            if pages <= 2:
                 break
         else:
             raise RuntimeError(
                 f"CV PDF for {cfg['folder']} still {pages} pages after full "
-                f"overflow ladder. Steps tried: {tried}. Tighten the profile "
-                f"paragraph in the config or drop a certificate for this role."
+                f"overflow ladder (19 Aug 2026 hard 2 page cap). Steps tried: {tried}. "
+                f"Tighten the profile paragraph in the config or drop a certificate for this role."
             )
         cv_html_path.write_text(cv_html, encoding="utf-8")
         first_step, first_pages = tried[0]
@@ -975,12 +1097,13 @@ def build_role(cfg):
                 f"final pages: {last_pages}"
             )
         if last_pages < 2:
-            print(f"  WARNING: {cfg['folder']} CV PDF has only {last_pages} page(s); target is 2 to 3")
+            print(f"  WARNING: {cfg['folder']} CV PDF has only {last_pages} page(s); target is exactly 2 (19 Aug 2026 rule)")
         # Mutate cfg so the docx render matches the html render
         cfg["projects"] = working_cfg["projects"]
         cfg["pp_bullets_per_entry"] = working_cfg["pp_bullets_per_entry"]
         cfg["ss_ft_max_bullets"] = working_cfg["ss_ft_max_bullets"]
         cfg["ss_intern_max_bullets"] = working_cfg["ss_intern_max_bullets"]
+        cfg["eray_max_bullets"] = working_cfg["eray_max_bullets"]
         cfg["certifications"] = working_cfg["certifications"]
         cfg["research_bullets"] = working_cfg["research_bullets"]
     except Exception as e:
