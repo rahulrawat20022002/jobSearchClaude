@@ -10,12 +10,15 @@ rejected, viadee rejected, BMW Qualitaetsanalyse applied, KfW applied,
 Allianz Insurance applied, Siemens Energy applied, Siemens AG operativer
 Service rejected, Deloitte rejected). CSV is now aligned with Notion.
 
+Top 3 to 5 cut per 28 July 2026 yield reset: with 0 drafted at run
+start, the run targets 5 fresh roles. Supplemental picks 4 and 5 added
+in the second pass to reach the top of the range.
+
 Platform mix for this run:
   - LinkedIn: 1 (PwC)
   - StepStone: 1 (Ed. Züblin)
-  - Company Page: 1 (Amprion, primary source jobs.amprion.net; also
-    listed on Xing)
-  - Xing: 0 primary
+  - Company Page: 2 (Amprion jobs.amprion.net; Bosch jobs.bosch.de)
+  - Xing: 1 (Ardex)
   - Indeed: 0 (capped at 1 and not needed this run)
 
 Freshness order per 12 July 2026 priority rule within the Germany tier:
@@ -38,6 +41,14 @@ Dedup check against applied-log.csv and Notion:
   - Ed. Züblin AG: never applied. New company. STRABAG SE is the parent
     group; not previously applied to STRABAG either.
   - AMPRION: never applied. New company (energy TSO).
+  - Bosch Rexroth AG: parent Bosch is in the log (Master Thesis Graph
+    Based QA and RAG rejected, Master Thesis Ambient Sensing rejected,
+    Softwareentwickler ad, plus a Bosch Rexroth Pflichtpraktikum). This
+    Werkstudent Data & AI role JobID REF294246D is a different team and
+    different work type, allowed under the standing 'different roles at
+    the same company' rule.
+  - Ardex GmbH: never applied. New company (Witten-based specialty
+    building materials).
 
 All three tag as 'Werkstudent'; all three are in-scope target roles
 under the master-projects.md 'Werkstudent / part time' work type.
@@ -152,6 +163,62 @@ CONFIGS_20AUG = [
             "In meinem Multi Agent RAG Projekt habe ich ein LangGraph orchestriertes Agentensystem gebaut, das Nutzerfragen ueber eine hybride BM25 plus Dense Retrieval Pipeline in Englisch und Deutsch end to end beantwortet. Der JudgeAgent bewertet Antworten auf 5 Dimensionen im JSON Modus bei Temperatur 0, und Self Preference Bias wurde eliminiert, indem der Judge Qwen2.5 14B bewusst auf einem anderen lokalen Modell als der Generator Mistral 7B laeuft. Ein EvalAgent liefert 5 Retrieval Metriken und 4 Generation Metriken pro Sprache in JSON und Markdown Reports auf einem gepaarten EN und DE Labeled Eval Set. Genau dieses Muster laesst sich direkt auf die Frage uebertragen, wie eine Copilot oder Agentic Change Rollout Kampagne belastbar KPI getrieben statt anekdotisch geplant und gesteuert wird.",
             "In CreditIQ habe ich unter EU AI Act und AGG 80 Prozent Fairness Grenze ein Kredit Scoring System entwickelt, den Disparate Impact von 0,79 auf 0,88 gehoben, mit SHAP getriebener Subgruppenanalyse eine intersektionelle Verzerrung ueber Alter und Geschlecht aufgedeckt und ueber ein vierstufiges Threshold Raster korrigiert, ohne in umgekehrte Diskriminierung zu kippen. Die False Negative Rate ist von 44 Prozent auf 16,7 Prozent gefallen bei einer stabilen Accuracy von 75 Prozent, und das Modell laeuft als Streamlit Decision Support Tool mit einer plain language LLM generierten Erklaerung fuer den Endbenutzer und einer Unit Test Suite mit 100 Prozent Branch Coverage. Genau diese Verbindung aus Modell, Governance und Nutzererlebnis ist das, was AI Enablement in einer regulierten Umgebung braucht.",
             "Ich arbeite sicher in Python, SQL, scikit-learn, LangGraph und den ueblichen Cloud Plattformen AWS und GCP und nutze aktiv ChatGPT und Claude als Werkzeuge im Alltag. Ich halte die NVIDIA Building LLM Applications With Prompt Engineering, AWS Academy Cloud Foundations und Google Data Analytics Zertifikate und wurde als Finalist des USAII Global AI Hackathon 2026 auf Graduate Level ausgezeichnet. Englisch spreche ich fliessend, mein Deutsch liegt bei B1 laufend, und ich hebe es aktiv weiter, damit die Kommunikation im Team vollstaendig auf Deutsch moeglich bleibt. Als Werkstudent kann ich in einem hybriden Modell einsteigen. Gerne bespreche ich meinen Beitrag zum AI Adoption and Enablement Team in einem persoenlichen Gespraech.",
+        ],
+    },
+
+    # 4. Bosch Rexroth AG, Lohr am Main
+    # Werkstudent Data & AI gestuetzte Informationsverarbeitung (w/m/div.)
+    # jobs.bosch.de company page, JobID REF294246D, posted 2026/08/17
+    # (3 days ago). Part-time, fixed-term. DE track (posting body in German).
+    # Field: Information Technology / Zentralbereiche. Apply:
+    # https://jobs.bosch.de/en/job/Werkstudent-Data-AI-gestuetzte-Informationsverarbeitung-w_m_div.-Lohr-am-Main?id=e5b8b80f-646a-464b-8a9e-aa73fdb7d8fd
+    {
+        "folder": "Bosch Rexroth Lohr Werkstudent Data AI Informationsverarbeitung",
+        "company": "Bosch Rexroth AG",
+        "lang": "de",
+        "tag": "Masterstudent Data Science and Analytics | Data und AI Pipelines fuer Kommunikation | Python + LangGraph + BigQuery",
+        "role_strip": "Werkstudent Data and AI gestuetzte Informationsverarbeitung",
+        "cl_date": "20. August 2026",
+        "cl_subject": "Werkstudent Data and AI gestuetzte Informationsverarbeitung, Referenz REF294246D, in Lohr am Main",
+        "profile": "Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim und praktischer Erfahrung an der Schnittstelle von Daten, Kuenstlicher Intelligenz und wirkungsvoller Kommunikation. Ich habe ein Multi Agent RAG System mit LLM as Judge Evaluation lokal auf Ollama mit Mistral 7B und Qwen2.5 14B und voller EN und DE Unterstuetzung gebaut und eine 3 stufige Bronze Silver Gold Medaillon Architektur auf BigQuery und Cloud Run entwickelt, die vollstaendig unbeaufsichtigt laeuft. Sicher in Python, SQL, LangGraph, Streamlit, BigQuery und Airflow und im Uebersetzen von Rohdaten in verstaendliche Ergebnisse fuer Fachabteilungen.",
+        "experience_bullets": ERAY_BULLETS_DE,
+        "projects": [P_RAG_DE, P_MOVIE_DE],
+        "research_bullets": DIABETES_BULLETS_DE,
+        "certifications": [CERT_NVIDIA_DE, CERT_AWS_DE, CERT_GOOGLE_DE],
+        "achievements": [ACH_USAII_DE],
+        "cl_paragraphs": [
+            "hiermit bewerbe ich mich fuer die Werkstudententaetigkeit Data and AI gestuetzte Informationsverarbeitung unter der Referenz REF294246D am Standort Lohr am Main. Als Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim reizt mich die in der Ausschreibung genannte Schnittstelle zwischen Daten, Kuenstlicher Intelligenz und wirkungsvoller Kommunikation, weil ich in den letzten Monaten genau an dieser Schnittstelle Systeme gebaut habe, die aus rohen Daten Antworten produzieren, denen Fachabteilungen vertrauen koennen.",
+            "In meinem Multi Agent RAG Projekt habe ich ein LangGraph orchestriertes Agentensystem gebaut, das Nutzerfragen ueber eine hybride BM25 plus Dense Retrieval Pipeline in Englisch und Deutsch end to end beantwortet. Der LanguageAgent steuert Sprache und Ausgabe zentral, der JudgeAgent bewertet Antworten auf 5 Dimensionen im JSON Modus bei Temperatur 0, und Self Preference Bias wurde eliminiert, indem der Judge Qwen2.5 14B bewusst auf einem anderen lokalen Modell als der Generator Mistral 7B laeuft. Ein EvalAgent liefert 5 Retrieval Metriken und 4 Generation Metriken pro Sprache in JSON und Markdown Reports auf einem gepaarten EN und DE Labeled Eval Set. Genau dieses Muster laesst sich direkt auf eine Data und AI Initiative uebertragen, in der ein interner Assistent auf technische und kommunikative Inhalte belastbar Antworten liefern soll.",
+            "In meinem Movie Analytics und ML Pipeline Projekt habe ich eine 3 stufige Bronze Silver Gold Medaillon Architektur auf BigQuery und Cloud Run mit vollautomatisiertem Cloud Scheduler Trigger gebaut, den Silver Layer mit Schema Enforcement, sicherer Typkonvertierung, Deduplizierung ueber Window Functions und Genre Normalisierung in ein relationales Modell gehaertet und einen BigQuery ML Klassifikator trainiert, der bewusst nur Pre Release Signale sieht, damit keine Leckage im Trainingssatz auftaucht. Bei eRay GmbH habe ich zusaetzlich eine end to end rekursive Zeitreihen Pipeline fuer 4 Wasserqualitaets Indikatoren mit CatBoost MultiQuantile und asymmetrischen 80 Prozent Vorhersageintervallen und einem 3 Pass Outlier System geliefert, das einen ehrlichen R Quadrat Wert von 0,86 bei geloestem Sauerstoff freilegte.",
+            "Ich arbeite sicher in Python, SQL, LangGraph, Streamlit, BigQuery und Airflow und nutze aktiv ChatGPT und Claude als Werkzeuge im Alltag. Ich halte die NVIDIA Building LLM Applications With Prompt Engineering, AWS Academy Cloud Foundations und Google Data Analytics Zertifikate und wurde als Finalist des USAII Global AI Hackathon 2026 auf Graduate Level ausgezeichnet. Englisch spreche ich fliessend, mein Deutsch liegt bei B1 laufend, und ich hebe es aktiv weiter, damit die Zusammenarbeit im Team vollstaendig auf Deutsch moeglich bleibt. Als Werkstudent kann ich in Lohr am Main im Rahmen des Werkstudentenmodells einsteigen. Gerne bespreche ich meinen Beitrag zu den Data und AI Initiativen in einem persoenlichen Gespraech.",
+        ],
+    },
+
+    # 5. Ardex GmbH, Witten
+    # Werkstudent:in AI & Innovation (m/w/d)
+    # Xing (posted 2 days ago). Werkstudent, DE track. Focus:
+    # "strategisch relevante AI und Innovationsprojekte mit globaler Reichweite",
+    # Zusammenarbeit mit internationalen Stakeholdern und Top Management.
+    # Apply: https://www.xing.com/jobs/witten-werkstudent-ai-innovation-156857879
+    {
+        "folder": "Ardex Witten Werkstudent AI Innovation",
+        "company": "Ardex GmbH",
+        "lang": "de",
+        "tag": "Masterstudent Data Science and Analytics | RAG und Fairness by Design | Python + LangGraph + Streamlit",
+        "role_strip": "Werkstudent AI and Innovation",
+        "cl_date": "20. August 2026",
+        "cl_subject": "Werkstudent AI and Innovation am Hauptsitz Witten",
+        "profile": "Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim und praktischer Erfahrung im Aufbau realer AI Anwendungen mit strategischer Wirkung. Ich habe ein Multi Agent RAG System mit LLM as Judge Evaluation lokal auf Ollama mit Mistral 7B und Qwen2.5 14B mit voller EN und DE Unterstuetzung gebaut, in CreditIQ ein Kredit Scoring System unter EU AI Act Bedingungen mit einem verbesserten Disparate Impact von 0,79 auf 0,88 entwickelt und bei eRay GmbH eine rekursive Zeitreihen Pipeline fuer 4 Umwelt Indikatoren geliefert. Sicher in Python, SQL, LangGraph, Streamlit und der Uebersetzung von Modellergebnissen in Business Entscheidungen.",
+        "experience_bullets": ERAY_BULLETS_DE,
+        "projects": [P_RAG_DE, P_CREDITIQ_DE],
+        "research_bullets": DIABETES_BULLETS_DE,
+        "certifications": [CERT_NVIDIA_DE, CERT_AWS_DE, CERT_GOOGLE_DE],
+        "achievements": [ACH_USAII_DE],
+        "cl_paragraphs": [
+            "hiermit bewerbe ich mich fuer die Werkstudententaetigkeit AI and Innovation am Hauptsitz Witten. Als Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim reizt mich der Anspruch der Ausschreibung, ueber klassische Werkstudententaetigkeiten hinaus in strategisch relevanten AI und Innovationsprojekten mit globaler Reichweite mitzugestalten, weil ich in den letzten Monaten genau die Art von AI Projekten geliefert habe, deren Ergebnisse eine Fachabteilung tatsaechlich zu einer Entscheidung fuehren.",
+            "In meinem Multi Agent RAG Projekt habe ich ein LangGraph orchestriertes Agentensystem gebaut, das Nutzerfragen ueber eine hybride BM25 plus Dense Retrieval Pipeline in Englisch und Deutsch end to end beantwortet. Der LanguageAgent zentralisiert Sprache und Ausgabesteuerung, der JudgeAgent bewertet Antworten auf 5 Dimensionen im JSON Modus bei Temperatur 0, und Self Preference Bias wurde eliminiert, indem der Judge Qwen2.5 14B bewusst auf einem anderen lokalen Modell als der Generator Mistral 7B laeuft. Ein EvalAgent liefert 5 Retrieval Metriken und 4 Generation Metriken pro Sprache in JSON und Markdown Reports auf einem gepaarten EN und DE Labeled Eval Set. Dieses Muster laesst sich direkt auf strategische AI Piloten mit globaler Reichweite anwenden, in denen ehrliche KPI Messung ueber Marketing Fiktion gewinnen muss.",
+            "In CreditIQ habe ich unter EU AI Act und AGG 80 Prozent Fairness Grenze ein Kredit Scoring System entwickelt, den Disparate Impact von 0,79 auf 0,88 gehoben, mit SHAP getriebener Subgruppenanalyse eine intersektionelle Verzerrung ueber Alter und Geschlecht aufgedeckt und ueber ein vierstufiges Threshold Raster korrigiert. Die False Negative Rate ist von 44 Prozent auf 16,7 Prozent gefallen bei einer stabilen Accuracy von 75 Prozent, und das Modell laeuft als Streamlit Decision Support Tool mit einer plain language LLM generierten Erklaerung. Bei eRay GmbH habe ich eine rekursive Zeitreihen Pipeline fuer 4 Wasserqualitaets Indikatoren mit CatBoost MultiQuantile und asymmetrischen 80 Prozent Vorhersageintervallen geliefert und die Evaluation mit einem 3 Pass Outlier System belastbar gemacht. Genau diese Kombination aus Modell, Governance und Business Verankerung suche ich in AI und Innovation Rollen.",
+            "Ich arbeite sicher in Python, SQL, scikit-learn, LangGraph, Streamlit und den ueblichen Cloud Plattformen AWS und GCP und nutze aktiv ChatGPT und Claude als Werkzeuge im Alltag. Ich halte die NVIDIA Building LLM Applications With Prompt Engineering, AWS Academy Cloud Foundations und Google Data Analytics Zertifikate und wurde als Finalist des USAII Global AI Hackathon 2026 auf Graduate Level ausgezeichnet. Englisch spreche ich fliessend, mein Deutsch liegt bei B1 laufend, und ich hebe es aktiv weiter, damit die Zusammenarbeit mit internationalen Stakeholdern und dem Management vollstaendig auf Deutsch moeglich bleibt. Als Werkstudent kann ich in Witten im Rahmen des Werkstudentenmodells einsteigen. Gerne bespreche ich meinen Beitrag zum AI and Innovation Team in einem persoenlichen Gespraech.",
         ],
     },
 ]

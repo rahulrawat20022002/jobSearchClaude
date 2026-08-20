@@ -7,6 +7,8 @@ FOLDERS = [
     "Amprion Dortmund Werkstudent KI",
     "Ed Zueblin Stuttgart Werkstudent BI Data Analytics",
     "PwC Deutschland Werkstudent AI Adoption Enablement",
+    "Bosch Rexroth Lohr Werkstudent Data AI Informationsverarbeitung",
+    "Ardex Witten Werkstudent AI Innovation",
 ]
 
 # Banned per 19 Aug 2026: no toward B2, Databricks, Delta Lake, LangChain, PyTorch

@@ -9,7 +9,9 @@
 
 - Notion data source fd974369-40b2-48c5-b660-d15256c88f52 queried at run start.
 - Rows with Status = drafted at run start: **0**. Gate zone: under 8 → normal top 3 to 5 cut (28 July 2026 yield reset). Fallback to CSV was NOT needed; Notion returned successfully on first query.
-- Backlog after run: 3 drafted (the three roles below).
+- Backlog after run: 5 drafted (the five roles below). This run targets the top of the 3 to 5 range because the backlog was empty at start.
+
+Second pass note: the first-pass digest reported 3 drafted. On re-read of the gate the run was expanded to 5 to hit the top of the "under 8 = top 3 to 5" range, and two supplemental roles (Bosch Rexroth, Ardex) were added.
 
 ## Reconciliation
 
@@ -68,13 +70,34 @@ CSV backup written to `applied-log.csv.bak_20260820` before the update.
 - Certs selected: NVIDIA, AWS, Google Data Analytics.
 - Deliverables at drafts/PwC Deutschland Werkstudent AI Adoption Enablement/: all 8 files present, CV PDF 2 pages, CL PDF 1 page (tight CSS applied).
 
+### 4. Bosch Rexroth AG — Werkstudent Data & AI gestuetzte Informationsverarbeitung (JobID REF294246D), Lohr am Main
+
+- Freshness: posted 2026/08/17 on jobs.bosch.de (~3 days ago).
+- Language track: DE (posting body in German on the German career page).
+- Apply method: company-portal (jobs.bosch.de).
+- Apply link: https://jobs.bosch.de/en/job/Werkstudent-Data-AI-gestuetzte-Informationsverarbeitung-w_m_div.-Lohr-am-Main?id=e5b8b80f-646a-464b-8a9e-aa73fdb7d8fd
+- Fit rationale: Bosch Rexroth Zentralbereiche runs Data & AI initiatives at the "Schnittstelle zwischen Daten, Kuenstlicher Intelligenz und wirkungsvoller Kommunikation." That maps directly onto the Multi-Agent RAG project (EN/DE end to end, LLM-as-Judge, EvalAgent with per-language KPIs) and the Movie Analytics medallion architecture on BigQuery/Cloud Run. Bosch Rexroth is a separate Bosch legal entity from prior applications; different team and different work type under the "different roles at the same company" rule.
+- Projects selected: Multi-Agent RAG (P_RAG_DE), Movie Analytics medallion (P_MOVIE_DE). Auto-trim ladder dropped to 1 project.
+- Certs selected: NVIDIA, AWS, Google Data Analytics.
+- Deliverables at drafts/Bosch Rexroth Lohr Werkstudent Data AI Informationsverarbeitung/: all 8 files present, CV PDF 2 pages, CL PDF 1 page (tight CSS applied).
+
+### 5. Ardex GmbH — Werkstudent AI and Innovation, Witten
+
+- Freshness: posted ~2 days ago on Xing.
+- Language track: DE (Xing listing body in German).
+- Apply method: platform-native via Xing; if the Xing "Bewerben" flow redirects to an Ardex-owned portal, OpenClaw will re-flag it as company-portal.
+- Apply link: https://www.xing.com/jobs/witten-werkstudent-ai-innovation-156857879
+- Fit rationale: role is explicitly framed as beyond classical Werkstudent work, on "strategisch relevanten AI und Innovationsprojekten mit globaler Reichweite" with international stakeholders and Top-Management contact. That is the exact shape of the Multi-Agent RAG project (KPI-driven evaluation of an AI initiative) plus CreditIQ (regulated AI governance with a real business outcome). Ardex is not previously in the log; clean new-company pick.
+- Projects selected: Multi-Agent RAG (P_RAG_DE), CreditIQ (P_CREDITIQ_DE). Auto-trim ladder dropped to 1 project.
+- Certs selected: NVIDIA, AWS, Google Data Analytics.
+- Deliverables at drafts/Ardex Witten Werkstudent AI Innovation/: all 8 files present, CV PDF 2 pages, CL PDF 1 page (tight CSS applied).
+
 ## Watchlist (scored but not drafted under the cap)
 
-- Bosch — Werkstudent Data & AI gestuetzte Informationsverarbeitung, Lohr am Main (LinkedIn). Same company as several past Bosch applications; different team. Held for a future run.
 - BMW Motorrad — Praktikum Digitalisierung & Data Analytics Gesamtfahrzeug, Muenchen (BMW career page). Pflichtpraktikum-shaped; strong overlap with Flight Tracking + Movie Analytics. Held for a future run to keep BMW cadence sane (BMW already featured heavily in Aug 15 and Aug 13 runs).
 - LEG Technologie und Digitalisierung — AI Engineer Agents & Integration, Duesseldorf (Xing, ~7 days ago). Interesting agentic role but titled as full role rather than Werkstudent; needs a re-read against the "Full-time and Junior full roles stay out of scope" filter before shipping.
-- Ardex — Werkstudent Data Science, Witten (Xing). Fresh (~2 days). Held to keep this run's platform mix balanced.
 - Generali Deutschland AG — Werkstudent Machine Learning Engineering, Saarbruecken (LinkedIn). Similar geographic tier and language track to PwC pick this run; deferred to keep company diversity.
+- Korian Deutschland — Werkstudent KI & Data Analytics, Muenchen (Xing, ~6 days). Solid fit; held to keep this run at 5 and preserve diversity for the next run.
 
 ## Dropped
 
@@ -88,17 +111,17 @@ CSV backup written to `applied-log.csv.bak_20260820` before the update.
 - Sources unreachable: none this run.
 - Freshness dating: cross-checked from the Xing "Vor N Tagen veroeffentlicht" strings and Amprion / PwC portfolio pages. Amprion was ~2 days ago; Ed. Zueblin and PwC ~1 week.
 - Prompt-injection content observed and not acted on: none this run.
-- Platform mix delivered: LinkedIn 1, StepStone 1, Company Page 1, Xing 0 primary (Amprion also listed on Xing but the company page is the primary), Indeed 0.
+- Platform mix delivered: LinkedIn 1 (PwC), StepStone 1 (Ed. Zueblin), Company Page 2 (Amprion jobs.amprion.net, Bosch Rexroth jobs.bosch.de), Xing 1 (Ardex), Indeed 0.
 - Distance / commute was NOT used as a scoring factor per master-projects.md.
 - Language level: all three postings are DE track. Rah's B1 laufend is below the C1 bars that some PwC / Ed. Zueblin roles typically state; both cover letters name this explicitly. This does not filter listings per the standing rule; Rah decides at the apply step whether to press forward.
 
 ## Deliverable summary
 
-- New drafts written: 3.
-- Files rendered per draft: 8 (CV .md/.html/.pdf/.docx, CoverLetter .md/.html/.pdf/.docx). 24 files total across the three folders.
-- CSV writes: 3 new drafted rows appended, plus 11 pre-existing `drafted` rows reconciled to their Notion Status.
-- Notion writes: 3 new `drafted` rows created.
+- New drafts written: 5.
+- Files rendered per draft: 8 (CV .md/.html/.pdf/.docx, CoverLetter .md/.html/.pdf/.docx). 40 files total across the five folders.
+- CSV writes: 5 new drafted rows appended, plus 11 pre-existing `drafted` rows reconciled to their Notion Status.
+- Notion writes: 5 new `drafted` rows created.
 
 ## Failures and halts this run
 
-- None. All three roles cleared the STEP 4 validation gate (page count 2, banned strings absent, header per the 19 Aug 2026 Ojas-style layout). Auto-trim messages printed during render for all three roles are normal per the ladder and are not failures.
+- None. All five roles cleared the STEP 4 validation gate (page count 2, banned strings absent, header per the 19 Aug 2026 Ojas-style layout). Auto-trim messages printed during render for all five roles are normal per the ladder and are not failures.
