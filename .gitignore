@@ -10,3 +10,10 @@ __pycache__/
 # Editor/tool artifacts
 *.swp
 *.env
+
+# Obsidian vault (Rah's local docs, not part of the repo)
+# Added 19 August 2026. The vault lives at ~/Desktop/jobSearchClaude/jobSearchClaude/
+# so it does not show up as untracked in git status and never gets pushed.
+jobSearchClaude/
+.obsidian/
+.obsidian_workspace
