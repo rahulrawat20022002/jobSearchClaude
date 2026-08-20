@@ -14,6 +14,12 @@ __pycache__/
 # Obsidian vault (Rah's local docs, not part of the repo)
 # Added 19 August 2026. The vault lives at ~/Desktop/jobSearchClaude/jobSearchClaude/
 # so it does not show up as untracked in git status and never gets pushed.
-jobSearchClaude/
+
+# Obsidian workspace metadata (per-machine, do not track)
+# The vault CONTENT (markdown notes + attachments/) IS tracked, so it gets
+# GitHub backup and history. Only the workspace UI state stays local.
 .obsidian/
 .obsidian_workspace
+jobSearchClaude/.obsidian/
+jobSearchClaude/.obsidian_workspace
+jobSearchClaude/.trash/
