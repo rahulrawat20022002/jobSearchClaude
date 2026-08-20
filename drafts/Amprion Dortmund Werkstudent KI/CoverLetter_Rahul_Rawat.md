@@ -1,0 +1,24 @@
+# Rahul Rawat
+
+rahulrawat2r@gmail.com  ·  015563603340  ·  linkedin.com/in/rahulrawat2r  ·  github.com/rahulrawat20022002  ·  Mannheim, Deutschland
+
+20. August 2026
+
+**Amprion GmbH**
+Personalabteilung
+
+**Bewerbung: Werkstudent KI, Stellen-ID 7959, im Team Unternehmensweite IT-Loesungen**
+
+Sehr geehrte Damen und Herren,
+
+hiermit bewerbe ich mich fuer die Werkstudententaetigkeit KI unter der Stellen-ID 7959 im Team Unternehmensweite IT-Loesungen am Standort Dortmund. Als Masterstudent der Data Science and Analytics an der SRH Heidelberg mit Sitz in Mannheim reizt mich besonders die Verbindung aus Wissens und Dokumentenmanagement, digitalem Arbeitsplatz und der Rolle von Amprion in der Energiewende, weil ich in den letzten Monaten genau an der Schnittstelle von RAG, LLM Tooling und ehrlich validierbaren KI Pipelines gearbeitet habe.
+
+In meinem Multi Agent RAG Projekt habe ich ein LangGraph orchestriertes Agentensystem gebaut, das Fragen ueber einen 14 Dokumente umfassenden Policy Korpus in Englisch und Deutsch end to end beantwortet. Der LanguageAgent zentralisiert Sprache und Ausgabesteuerung, ein JudgeAgent bewertet Antworten auf 5 Dimensionen im JSON Modus bei Temperatur 0, und Self Preference Bias wurde eliminiert, indem der Judge Qwen2.5 14B bewusst auf einem anderen lokalen Modell als der Generator Mistral 7B laeuft. Ein EvalAgent liefert 5 Retrieval Metriken und 4 Generation Metriken pro Sprache in JSON und Markdown Reports, so dass ein Wissensmanagement Assistent belastbar iteriert werden kann. Genau dieses Muster laesst sich direkt auf Amprions Wissens und Dokumentenmanagement uebertragen, damit ein AI Assistent auf internen Dokumenten die Antworten liefert, die die Fachbereiche wirklich brauchen.
+
+In meinem Movie Analytics und ML Pipeline Projekt habe ich eine 3 stufige Bronze Silver Gold Medaillon Architektur auf BigQuery und Cloud Run mit vollautomatisiertem Cloud Scheduler Trigger gebaut, den Silver Layer mit Schema Enforcement, sicherer Typkonvertierung und Deduplizierung ueber Window Functions in ein relationales Modell gehaertet und einen BigQuery ML Klassifikator trainiert, der bewusst nur Pre Release Signale sieht, damit keine Leckage im Trainingssatz auftaucht. Bei eRay GmbH habe ich zusaetzlich eine end to end rekursive Zeitreihen Pipeline fuer 4 Wasserqualitaets Indikatoren mit CatBoost MultiQuantile und asymmetrischen 80 Prozent Vorhersageintervallen geliefert, mit einem 3 Pass Outlier System und einer rollenden z-score Kontrolle, die einen ehrlichen R Quadrat Wert von 0,86 bei geloestem Sauerstoff freilegte.
+
+Ich arbeite sicher in Python, SQL, LangGraph, Streamlit, BigQuery und Airflow sowie in den ueblichen Cloud Plattformen AWS und GCP. Ich halte die NVIDIA Building LLM Applications With Prompt Engineering, AWS Academy Cloud Foundations und Google Data Analytics Zertifikate und wurde als Finalist des USAII Global AI Hackathon 2026 auf Graduate Level ausgezeichnet. Englisch spreche ich fliessend, mein Deutsch liegt bei B1 laufend, und ich hebe es aktiv weiter, damit die Zusammenarbeit im Team vollstaendig auf Deutsch moeglich bleibt. Als Werkstudent kann ich in Dortmund im Rahmen des Werkstudentenmodells einsteigen. Gerne bespreche ich meinen Beitrag zum Team Unternehmensweite IT-Loesungen in einem persoenlichen Gespraech.
+
+Mit freundlichen Grüßen,
+
+**Rahul Rawat**
