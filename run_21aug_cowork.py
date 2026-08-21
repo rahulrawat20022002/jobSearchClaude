@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 """Runner for the 21 August 2026 job search run (top 3, normal cut)."""
-=======
-"""Runner for the 21 August 2026 job search run (top 2, normal backlog gate)."""
->>>>>>> origin/claude/adoring-dijkstra-65njrt
 
 from role_configs_21aug import CONFIGS_21AUG
 from build_html import build_role
