@@ -31,6 +31,18 @@ from docx.oxml import OxmlElement
 ROOT = Path(__file__).resolve().parent
 DRAFTS = ROOT / "drafts"
 
+# ---- 24 August 2026 rule: SS Engineers and Contractors visibility switch ----
+# Governs ONLY the two SS Engineers and Contractors entries (Junior Associate
+# Software Developer, Front End Developer Intern) inside the Experience
+# section, across every render path (HTML/PDF, docx, md). The eRay GmbH
+# entry is NOT gated by this switch and always renders regardless. Default
+# is True (SS Engineers entries visible) on every run. Only flip to False
+# when Rah explicitly says to hide the SS Engineers entries; flip back to
+# True only when he explicitly says to bring them back. Cowork must never
+# change this switch on its own judgement, and must never leave it False
+# across runs without an explicit standing instruction from Rah to do so.
+SHOW_SS_ENGINEERS_EXPERIENCE = True
+
 # --- Palette --------------------------------------------------------------
 NAVY_HEX = "#1F3A5F"
 NAVY_GREY_HEX = "#6C7A93"
@@ -379,45 +391,48 @@ def html_cv(cfg):
     # 1. eRay GmbH Data Scientist. 2. SS Engineers Junior Associate Software
     # Developer. 3. SS Engineers Front End Developer Intern. SS Engineers bullets
     # come from role_configs.py so master-projects.md remains the source of truth.
-    from role_configs import (
-        SATENDRA_FT_BULLETS_EN, SATENDRA_FT_BULLETS_DE,
-        SATENDRA_INTERN_BULLETS_EN, SATENDRA_INTERN_BULLETS_DE,
-    )
+    # 24 August 2026 rule: eRay always renders; SS Engineers entries (2 and 3)
+    # are gated by SHOW_SS_ENGINEERS_EXPERIENCE.
     exp_dates = "Oct 2025 to Mar 2026" if not is_de else "Okt 2025 bis Mrz 2026"
     exp_place = "Heidelberg"
-    ft_dates = "Aug 2023 to Aug 2024" if not is_de else "Aug 2023 bis Aug 2024"
-    intern_dates = "Feb 2023 to July 2023" if not is_de else "Feb 2023 bis Juli 2023"
-    ft_title = "Junior Associate Software Developer"
-    intern_title = "Front End Developer Intern"
-    ft_all = SATENDRA_FT_BULLETS_DE if is_de else SATENDRA_FT_BULLETS_EN
-    intern_all = SATENDRA_INTERN_BULLETS_DE if is_de else SATENDRA_INTERN_BULLETS_EN
-    # 4 August 2026 CV length calibration defaults: SS FT capped at 2 bullets,
-    # SS Intern capped at 1 bullet. Overridable via cfg for tighter overflow.
-    ft_bullets = ft_all[:cfg.get("ss_ft_max_bullets", 2)]
-    intern_bullets = intern_all[:cfg.get("ss_intern_max_bullets", 1)]
     # 19 August 2026 rule: eRay bullets participate in the overflow ladder;
     # default cap is 3 (down from unbounded 4). Ladder can drop to 2.
     eray_bullets = cfg["experience_bullets"][:cfg.get("eray_max_bullets", 3)]
-    exp_html = (
-        _entry_html(
-            exp_dates, exp_place,
-            "eRay GmbH", "Data Scientist",
-            eray_bullets,
-            ["Python", "CatBoost", "Prophet", "scikit learn", "MICE"],
-        )
-        + _entry_html(
-            ft_dates, "India",
-            "SS Engineers and Contractors", ft_title,
-            ft_bullets,
-            ["React", "module federation", "Playwright", "AngularJS", "HTML5", "CSS3"],
-        )
-        + _entry_html(
-            intern_dates, "India",
-            "SS Engineers and Contractors", intern_title,
-            intern_bullets,
-            ["React", "HTML5", "CSS3", "Git", "code review workflow"],
-        )
+    exp_html = _entry_html(
+        exp_dates, exp_place,
+        "eRay GmbH", "Data Scientist",
+        eray_bullets,
+        ["Python", "CatBoost", "Prophet", "scikit learn", "MICE"],
     )
+    if SHOW_SS_ENGINEERS_EXPERIENCE:
+        from role_configs import (
+            SATENDRA_FT_BULLETS_EN, SATENDRA_FT_BULLETS_DE,
+            SATENDRA_INTERN_BULLETS_EN, SATENDRA_INTERN_BULLETS_DE,
+        )
+        ft_dates = "Aug 2023 to Aug 2024" if not is_de else "Aug 2023 bis Aug 2024"
+        intern_dates = "Feb 2023 to July 2023" if not is_de else "Feb 2023 bis Juli 2023"
+        ft_title = "Junior Associate Software Developer"
+        intern_title = "Front End Developer Intern"
+        ft_all = SATENDRA_FT_BULLETS_DE if is_de else SATENDRA_FT_BULLETS_EN
+        intern_all = SATENDRA_INTERN_BULLETS_DE if is_de else SATENDRA_INTERN_BULLETS_EN
+        # 4 August 2026 CV length calibration defaults: SS FT capped at 2 bullets,
+        # SS Intern capped at 1 bullet. Overridable via cfg for tighter overflow.
+        ft_bullets = ft_all[:cfg.get("ss_ft_max_bullets", 2)]
+        intern_bullets = intern_all[:cfg.get("ss_intern_max_bullets", 1)]
+        exp_html += (
+            _entry_html(
+                ft_dates, "India",
+                "SS Engineers and Contractors", ft_title,
+                ft_bullets,
+                ["React", "module federation", "Playwright", "AngularJS", "HTML5", "CSS3"],
+            )
+            + _entry_html(
+                intern_dates, "India",
+                "SS Engineers and Contractors", intern_title,
+                intern_bullets,
+                ["React", "HTML5", "CSS3", "Git", "code review workflow"],
+            )
+        )
 
     # Education
     edu_dates_1 = "Apr 2025 to Present" if not is_de else "Apr 2025 bis heute"
@@ -798,21 +813,11 @@ def docx_cv(cfg, path):
         val_r.font.size = Pt(10.5)
         val_r.font.color.rgb = BODY
 
-    # Professional Experience, three entries per the 2 August 2026 rule
-    from role_configs import (
-        SATENDRA_FT_BULLETS_EN, SATENDRA_FT_BULLETS_DE,
-        SATENDRA_INTERN_BULLETS_EN, SATENDRA_INTERN_BULLETS_DE,
-    )
+    # Professional Experience, three entries per the 2 August 2026 rule.
+    # 24 August 2026 rule: eRay always renders; SS Engineers entries are
+    # gated by SHOW_SS_ENGINEERS_EXPERIENCE.
     _add_section_heading(doc, hdr["experience"])
     exp_dates = "Oct 2025 to Mar 2026" if not is_de else "Okt 2025 bis Mrz 2026"
-    ft_dates = "Aug 2023 to Aug 2024" if not is_de else "Aug 2023 bis Aug 2024"
-    intern_dates = "Feb 2023 to July 2023" if not is_de else "Feb 2023 bis Juli 2023"
-    ft_all = SATENDRA_FT_BULLETS_DE if is_de else SATENDRA_FT_BULLETS_EN
-    intern_all = SATENDRA_INTERN_BULLETS_DE if is_de else SATENDRA_INTERN_BULLETS_EN
-    # 4 August 2026 CV length calibration defaults: SS FT capped at 2 bullets,
-    # SS Intern capped at 1 bullet. Overridable via cfg for tighter overflow.
-    ft_bullets = ft_all[:cfg.get("ss_ft_max_bullets", 2)]
-    intern_bullets = intern_all[:cfg.get("ss_intern_max_bullets", 1)]
     eray_bullets_docx = cfg["experience_bullets"][:cfg.get("eray_max_bullets", 3)]
     _add_entry(
         doc, exp_dates, "Heidelberg",
@@ -820,18 +825,31 @@ def docx_cv(cfg, path):
         eray_bullets_docx,
         ["Python", "CatBoost", "Prophet", "scikit learn", "MICE"],
     )
-    _add_entry(
-        doc, ft_dates, "India",
-        "SS Engineers and Contractors", "Junior Associate Software Developer",
-        ft_bullets,
-        ["React", "module federation", "Playwright", "AngularJS", "HTML5", "CSS3"],
-    )
-    _add_entry(
-        doc, intern_dates, "India",
-        "SS Engineers and Contractors", "Front End Developer Intern",
-        intern_bullets,
-        ["React", "HTML5", "CSS3", "Git", "code review workflow"],
-    )
+    if SHOW_SS_ENGINEERS_EXPERIENCE:
+        from role_configs import (
+            SATENDRA_FT_BULLETS_EN, SATENDRA_FT_BULLETS_DE,
+            SATENDRA_INTERN_BULLETS_EN, SATENDRA_INTERN_BULLETS_DE,
+        )
+        ft_dates = "Aug 2023 to Aug 2024" if not is_de else "Aug 2023 bis Aug 2024"
+        intern_dates = "Feb 2023 to July 2023" if not is_de else "Feb 2023 bis Juli 2023"
+        ft_all = SATENDRA_FT_BULLETS_DE if is_de else SATENDRA_FT_BULLETS_EN
+        intern_all = SATENDRA_INTERN_BULLETS_DE if is_de else SATENDRA_INTERN_BULLETS_EN
+        # 4 August 2026 CV length calibration defaults: SS FT capped at 2 bullets,
+        # SS Intern capped at 1 bullet. Overridable via cfg for tighter overflow.
+        ft_bullets = ft_all[:cfg.get("ss_ft_max_bullets", 2)]
+        intern_bullets = intern_all[:cfg.get("ss_intern_max_bullets", 1)]
+        _add_entry(
+            doc, ft_dates, "India",
+            "SS Engineers and Contractors", "Junior Associate Software Developer",
+            ft_bullets,
+            ["React", "module federation", "Playwright", "AngularJS", "HTML5", "CSS3"],
+        )
+        _add_entry(
+            doc, intern_dates, "India",
+            "SS Engineers and Contractors", "Front End Developer Intern",
+            intern_bullets,
+            ["React", "HTML5", "CSS3", "Git", "code review workflow"],
+        )
 
     # Education, placed right after Experience per ATS-clean section order
     _add_section_heading(doc, hdr["education"])
