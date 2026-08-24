@@ -199,7 +199,7 @@ or voluntary-internship listings surfaced in this run's search set).
   confirmed (name, positioning tag, contact line 1 with email, contact
   line 2, italic status line).
 - CSV: 6 rows reconciled from drafted to applied, 3 new drafted rows
-  appended. Ending CSV status counts: 76 rejected, 62 applied, 18 Not
+  appended. Ending CSV status counts: 76 rejected, 59 applied, 18 Not
   listed Anymore, 1 shortlisted but no interview, 3 drafted (this run's
   new roles, matching Notion).
 - Notion: 6 rows already correct (no action needed there, CSV was the lagging
