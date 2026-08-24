@@ -15,41 +15,61 @@ the **8 to 10 tier** under the 28 July 2026 yield reset gate, which caps
 this run at the **top 3** newly scored roles. Ran steps 3 through 6 as
 normal (not the 11+ hard pause).
 
-## CRITICAL FINDING: 9 orphaned Notion "drafted" rows with no git content
+## UPDATE (after this run): merge conflict revealed 4 of 9 were real, not orphaned
+
+At the time this run started, the local checkout was cloned from a stale
+`main` — a same-day run (23 Aug) had drafted 4 real roles and pushed to
+`main` after this session's clone but before this session finished. A
+merge conflict surfaced when reconciling this run's branch with `main`
+after the fact, which corrected the finding below: **ADAC, Rosenberger
+Hochfrequenztechnik, DELO Industrie Klebstoffe, and nerou GmbH DO have
+real rendered deliverables** (confirmed via `role_configs_23aug.py` and
+their 8 files each on `main`), and are genuinely applied-ready, not
+orphaned. Merging `main` into this branch pulled that content in; CSV was
+merged to keep both this run's 3 rows and the 23 Aug run's 9 rows.
+
+**The remaining finding below still holds for 5 companies only**:
+Boellhoff Gruppe, Anstalt fuer Kommunale Datenverarbeitung in Bayern
+(AKDB), NewTec GmbH, Schaeffler Technologies, and logen.ai. These 5 still
+have no draft folder anywhere in git history (checked again after the
+merge with `main`) despite Notion showing them 'drafted' since 22 Aug.
+
+## CRITICAL FINDING (corrected): 5 orphaned Notion "drafted" rows with no git content
 
 Before drafting anything new, reconciliation surfaced a serious integrity
 issue that Rah should investigate:
 
-**9 of the 9 pre-run Notion rows in Status = 'drafted' point to Draft Path
+**5 pre-run Notion rows in Status = 'drafted' point to Draft Path
 folders that do not exist anywhere in this git repository or its commit
-history.** Companies affected: Boellhoff Gruppe, Anstalt fuer Kommunale
-Datenverarbeitung in Bayern (AKDB), NewTec GmbH, Schaeffler Technologies,
-logen.ai, nerou GmbH, ADAC, DELO Industrie Klebstoffe, Rosenberger
-Hochfrequenztechnik. Dated 22 to 23 August 2026 in Notion's Date Drafted
-field.
+history, even after merging in the 23 Aug run from `main`.** Companies
+affected: Boellhoff Gruppe, Anstalt fuer Kommunale Datenverarbeitung in
+Bayern (AKDB), NewTec GmbH, Schaeffler Technologies, logen.ai. All dated
+22 August 2026 in Notion's Date Drafted field (the 23 Aug dated rows,
+ADAC/Rosenberger/DELO/nerou, are confirmed real per the update above).
 
 I verified these are real, currently live job postings (confirmed via
 fresh StepStone/LinkedIn search results today), so this does not look like
-fabricated data. The likely explanation is a prior Cowork run that created
-the Notion rows and then crashed, lost its worktree, or failed to commit
-and push before completing steps 5 through 8 — leaving Notion claiming
-"drafted" for roles that were never actually rendered or committed
-anywhere.
+fabricated data. The likely explanation is a prior Cowork run (22 Aug)
+that created the Notion rows and then crashed, lost its worktree, or
+failed to commit and push before completing steps 5 through 8 — leaving
+Notion claiming "drafted" for roles that were never actually rendered or
+committed anywhere.
 
 Per invariant 2 (git is the source of truth for content) and invariant 3
-(halting beats a false success), I did **NOT** mirror these 9 rows into
+(halting beats a false success), I did **NOT** mirror these 5 rows into
 `applied-log.csv` — there is no real deliverable in this repo to point an
 audit trail at, and doing so would fabricate evidence of drafts that don't
 exist. I also did **NOT** modify or delete the Notion rows themselves;
 Cowork's charter is to create new drafted rows, not alter existing ones,
 and deleting data outside that scope risked destroying a legitimate record
-if I'm wrong about the cause. **These 9 rows still counted toward the
-backlog gate's authoritative Notion count** (9, landing in the 8-10 cap
-tier), per the standing rule that the Notion count is authoritative
-regardless of anomalies underneath it.
+if I'm wrong about the cause. **All 9 rows (the 5 still orphaned plus the
+4 later confirmed real) counted toward the backlog gate's authoritative
+Notion count** at run start (9, landing in the 8-10 cap tier), per the
+standing rule that the Notion count is authoritative regardless of
+anomalies underneath it.
 
 **Recommended action for Rah:** decide whether to (a) re-run the drafting
-pipeline for these 9 roles for real, or (b) manually flip their Notion
+pipeline for these 5 roles for real, or (b) manually flip their Notion
 Status to something other than 'drafted' (e.g. a new "needs redraft" note)
 so they stop inflating the backlog gate count on every future run.
 
@@ -71,8 +91,11 @@ company + role matched case-insensitively) found:
 
   (All 6 were evidently submitted by OpenClaw since the 21 August run.)
 
-- **9 Notion-only orphaned rows**: see Critical Finding above. Not
-  mirrored to CSV.
+- **9 Notion-only rows found at run start, later resolved to 5 truly
+  orphaned + 4 confirmed real**: see Update and Critical Finding above.
+  The 5 still-orphaned rows were not mirrored to CSV; the 4 confirmed
+  real rows (ADAC, Rosenberger, DELO, nerou) arrived via the post-run
+  merge with `main`, which already had their CSV rows and deliverables.
 
 - No CSV rows were found missing a Notion counterpart (the one apparent
   mismatch, Ärzteverband Deutscher Allergologen, was a Unicode normalization
@@ -199,10 +222,14 @@ or voluntary-internship listings surfaced in this run's search set).
   confirmed (name, positioning tag, contact line 1 with email, contact
   line 2, italic status line).
 - CSV: 6 rows reconciled from drafted to applied, 3 new drafted rows
-  appended. Ending CSV status counts: 76 rejected, 59 applied, 18 Not
-  listed Anymore, 1 shortlisted but no interview, 3 drafted (this run's
-  new roles, matching Notion).
+  appended by this run. After merging in the 23 Aug run from `main`
+  (see Update above), final CSV status counts on this branch: 76
+  rejected, 59 applied, 18 Not listed Anymore, 1 shortlisted but no
+  interview, 12 drafted (9 from the 22-23 Aug run, of which 4 are
+  confirmed real and 5 remain orphaned per the corrected Critical
+  Finding, plus this run's 3).
 - Notion: 6 rows already correct (no action needed there, CSV was the lagging
   side), 3 new drafted rows created and verified present via follow-up
-  query. Notion drafted total after this run: 12 (9 pre-existing,
-  including the 9 orphaned rows flagged above, plus this run's 3).
+  query. Notion drafted total after this run: 12 (9 pre-existing — 4
+  confirmed real, 5 still orphaned per the corrected finding above —
+  plus this run's 3).
