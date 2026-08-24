@@ -128,7 +128,7 @@ dated rules or existing role_configs.
 
 7. Digest and Gmail. Write Job_Digest_YYYY-MM-DD.md with top cut, watchlist, dropped roles, transparency block, backlog gate result, platform breakdown, language track decisions, and apply method per role. Create a Gmail draft to rahulrawat2r@gmail.com with the digest. Never send.
 
-8. Commit and push. `git add -A`, commit with a message naming the date and count, push to main. If push fails, retry once, then flag in the digest. Do not force push.
+8. Commit and push. `git add -A`, commit with a message naming the date and count, push to main. If push fails, retry once, then flag in the digest. Do not force push. **24 August 2026 rule:** the repo has "Allow auto-merge" and "Automatically delete head branches" enabled at Rah's request. After the push lands and the Claude Code platform opens its PR for the branch, enable auto-merge on that PR via the GitHub API (or `gh pr merge --auto --squash`/equivalent) so it merges without Rah manually clicking Merge; the now-merged branch then self-deletes per the repo setting. If a merge conflict against main blocks this (a same-day run already pushed first), resolve it per the standing merge-conflict handling before enabling auto-merge, and never force-resolve a conflict where both sides changed the same logic without flagging it in the digest.
 
 9. Verify. Confirm every drafted folder has all eight deliverables. Confirm CSV and Notion drafted counts match after the run. Confirm the push landed with `git log -1 origin/main`. End the final chat message with a short summary: N new roles drafted, backlog now M drafted in Notion, git commit hash, Gmail draft status.
 
