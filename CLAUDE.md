@@ -103,6 +103,32 @@ dated rules or existing role_configs.
 
 ---
 
+## 24 August 2026 rule: SS Engineers and Contractors visibility switch
+
+Rah asked for a quick on/off switch for the SS Engineers and Contractors
+entries (Junior Associate Software Developer, Front End Developer Intern)
+inside the CV's Experience section, separate from the eRay GmbH entry,
+which always renders and is never gated by this switch.
+
+The switch lives in `build_html.py` as the module level constant
+`SHOW_SS_ENGINEERS_EXPERIENCE`, gating both SS Engineers entries across
+every render path (HTML/PDF, docx; the standalone `CV_Rahul_Rawat.md`
+companion file only ever showed the eRay entry and is unaffected).
+
+- **Default is `True`** (SS Engineers entries visible) on every run,
+  including every future scheduled Cowork run. Cowork must never change
+  this switch on its own judgement and must never leave it `False` across
+  runs without an explicit standing instruction from Rah to do so.
+- **To hide:** Rah tells Cowork explicitly (in chat, or as an explicit
+  line added to this file or the scheduled prompt for future runs) to set
+  `SHOW_SS_ENGINEERS_EXPERIENCE = False` in `build_html.py`.
+- **To show again:** Rah tells Cowork explicitly to set it back to `True`.
+- Flipping the switch does not require touching any `role_configs_*.py`
+  file; `cfg["experience_bullets"]` (eRay) keeps working exactly as before
+  regardless of the switch's state.
+
+---
+
 ## Agent A, the Cowork Drafting Agent
 
 **Trigger:** scheduled task in Cowork, runs on cron in the cloud sandbox.
