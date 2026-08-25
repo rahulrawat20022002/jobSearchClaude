@@ -61,7 +61,7 @@
 - **Pay:** not a filter. Include unpaid and low-paid roles, including unpaid mandatory internships. Do not rank or drop by compensation.
 - **German level:** B1, currently in progress — accept German-language listings, but flag the required German level (none / A2 / B1 / B2 / C1) per posting and compare it against this current B1 level
 - **Base:** Mannheim — distance/commute is NOT a scoring factor. Rank by geographic tier first (all of Germany, remote or on-site, ahead of the rest of Europe), then by recency and "Best for" overlap. Note location and any relocation/on-site expectation in the digest as plain information only.
-- **Search sources:** do not rely on Indeed alone. Also try StepStone, Xing, Glassdoor, LinkedIn Jobs, and company career pages (via Claude in Chrome when connected). State in the digest which sources were reachable each run.
+- **Search sources:** do not rely on Indeed alone. Also try StepStone, Xing, Glassdoor, LinkedIn Jobs, JobTeaser (jobteaser.com), and company career pages (via Claude in Chrome when connected). State in the digest which sources were reachable each run.
 - **Drop from results:** dual-study / Duales Studium / apprenticeship programmes; recruiter "Quereinsteiger / career-changer" ads; voluntary internships (freiwilliges Praktikum) — only mandatory Pflichtpraktikum internships are in scope
 
 ---

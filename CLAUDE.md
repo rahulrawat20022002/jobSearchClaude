@@ -129,6 +129,24 @@ companion file only ever showed the eRay entry and is unaffected).
 
 ---
 
+## 25 August 2026 rule: JobTeaser added as a search source
+
+Rah asked for jobteaser.com (a European student and graduate job board,
+distinct from LinkedIn/StepStone/Xing/Indeed) to be added as a source
+Cowork fetches from while searching, alongside the existing sources.
+
+- **Notion schema:** `JobTeaser` added as a new option on the `Source`
+  select property (added via schema migration on 25 Aug 2026).
+- **When to use it:** step 4 (search, filter, score, tailor) may fetch
+  postings from jobteaser.com the same way it fetches from StepStone or
+  Xing; a role sourced there gets `Source: JobTeaser` in both the CSV and
+  the matching Notion row, same as any other source.
+- **No cap:** unlike Indeed (capped at 1 per run under the 28 July yield
+  reset), JobTeaser has no standing cap; treat it as a normal source in
+  the platform mix reported in the digest's transparency block.
+
+---
+
 ## Agent A, the Cowork Drafting Agent
 
 **Trigger:** scheduled task in Cowork, runs on cron in the cloud sandbox.
@@ -146,7 +164,7 @@ companion file only ever showed the eRay entry and is unaffected).
 
 3. Reconciliation. For each CSV row, match on company plus role case insensitive. If Notion has a different Status, update the CSV to match Notion. If a CSV row is missing from Notion, create the Notion row with the CSV status. Reconciliation runs on paused runs too.
 
-4. Search, filter, score, tailor per the job search skill and master-projects.md. Sources in order of preference: LinkedIn, career pages, StepStone, Xing, Indeed (Indeed capped at 1 per run under the 28 July yield weighting). Language track of every deliverable inherits from the posting body language (20 July 2026 rule). Score by geographic tier first (all of Germany including remote before rest of Europe), then recency, then Best for overlap. Distance is not a scoring factor.
+4. Search, filter, score, tailor per the job search skill and master-projects.md. Sources in order of preference: LinkedIn, career pages, StepStone, Xing, JobTeaser, Indeed (Indeed capped at 1 per run under the 28 July yield weighting). Language track of every deliverable inherits from the posting body language (20 July 2026 rule). Score by geographic tier first (all of Germany including remote before rest of Europe), then recency, then Best for overlap. Distance is not a scoring factor.
 
 5. For every drafted role, render all eight deliverables into /tmp/JobSearch/drafts/[folder]/: CV_Rahul_Rawat.md, CoverLetter_Rahul_Rawat.md, CV_Rahul_Rawat.docx, CV_Rahul_Rawat.html, CV_Rahul_Rawat.pdf, CoverLetter_Rahul_Rawat.docx, CoverLetter_Rahul_Rawat.html, CoverLetter_Rahul_Rawat.pdf. Use build_html.py plus a fresh role_configs_YYYYMMDD.py and run_YYYYMMDD.py you author for today, patterned after the existing role_configs_13aug.py and run_13aug.py. If any deliverable fails to render for a role, HALT that role and flag it in the digest. Never ship .md only.
 
@@ -270,7 +288,7 @@ Columns (both agents must respect exact names):
 - **Company** (title)
 - **Role** (text)
 - **Location** (text)
-- **Source** (select: Indeed, StepStone, LinkedIn, Xing, Glassdoor, Company Page, Other)
+- **Source** (select: Indeed, StepStone, LinkedIn, Xing, Glassdoor, JobTeaser, Company Page, Other)
 - **Status** (select: drafted, applied, interviewing, rejected, offer, withdrawn, Not listed Anymore, shortlisted, shortlisted but no interview)
 - **Apply Method** (select: platform-native, company-portal)
 - **Apply Link** (URL)
