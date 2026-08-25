@@ -129,6 +129,33 @@ companion file only ever showed the eRay entry and is unaffected).
 
 ---
 
+## 25 August 2026 rule: Job Teaser column
+
+Rah asked for a short job teaser to be captured for every posting whenever
+Cowork fetches it, so the backlog is scannable in Notion without reopening
+every listing.
+
+- **Notion schema:** new `Job Teaser` text property on the Job Applications
+  data source (added via schema migration on 25 Aug 2026, see the Notion
+  schema section below for its position).
+- **When to write it:** every time step 4 (search, filter, score, tailor)
+  fetches a posting's full text for a role that ends up drafted, and every
+  time a role is drafted ad hoc outside the scheduled run. Write it as part
+  of step 6's dual write, in the same `create_pages` call as the rest of
+  the row.
+- **Content:** 1 to 2 plain sentences in Cowork's own words summarising
+  what the role or thesis is actually about, not a copy paste of the
+  posting's own marketing language and not the CV tailoring rationale.
+  English regardless of the posting's language track, since this field is
+  for Rah's own quick scanning, not part of any deliverable sent to an
+  employer.
+- **Scope:** this is a Notion only field. It is not added to
+  `applied-log.csv` (the CSV stays a lean audit trail) and it is not part
+  of any CV, cover letter, or the digest's per role write ups, which
+  already carry their own fit rationale.
+
+---
+
 ## Agent A, the Cowork Drafting Agent
 
 **Trigger:** scheduled task in Cowork, runs on cron in the cloud sandbox.
@@ -150,7 +177,7 @@ companion file only ever showed the eRay entry and is unaffected).
 
 5. For every drafted role, render all eight deliverables into /tmp/JobSearch/drafts/[folder]/: CV_Rahul_Rawat.md, CoverLetter_Rahul_Rawat.md, CV_Rahul_Rawat.docx, CV_Rahul_Rawat.html, CV_Rahul_Rawat.pdf, CoverLetter_Rahul_Rawat.docx, CoverLetter_Rahul_Rawat.html, CoverLetter_Rahul_Rawat.pdf. Use build_html.py plus a fresh role_configs_YYYYMMDD.py and run_YYYYMMDD.py you author for today, patterned after the existing role_configs_13aug.py and run_13aug.py. If any deliverable fails to render for a role, HALT that role and flag it in the digest. Never ship .md only.
 
-6. Dual write. Append every newly drafted role to applied-log.csv with status drafted. Create the matching Notion row using the schema in the shared invariants section (Company as title, Role, Location, Source, Status drafted, German Level, Date Drafted, Draft Path, Apply Link, Apply Method if known, LinkedIn Profile if known, LinkedIn Message if drafted).
+6. Dual write. Append every newly drafted role to applied-log.csv with status drafted. Create the matching Notion row using the schema in the shared invariants section (Company as title, Role, Job Teaser, Location, Source, Status drafted, German Level, Date Drafted, Draft Path, Apply Link, Apply Method if known, LinkedIn Profile if known, LinkedIn Message if drafted).
 
 7. Digest and Gmail. Write Job_Digest_YYYY-MM-DD.md with top cut, watchlist, dropped roles, transparency block, backlog gate result, platform breakdown, language track decisions, and apply method per role. Create a Gmail draft to rahulrawat2r@gmail.com with the digest. Never send.
 
@@ -269,6 +296,7 @@ Columns (both agents must respect exact names):
 
 - **Company** (title)
 - **Role** (text)
+- **Job Teaser** (text, 1 to 2 sentence summary of what the role or thesis is actually about, written by Cowork while fetching the posting, added 25 August 2026)
 - **Location** (text)
 - **Source** (select: Indeed, StepStone, LinkedIn, Xing, Glassdoor, Company Page, Other)
 - **Status** (select: drafted, applied, interviewing, rejected, offer, withdrawn, Not listed Anymore, shortlisted, shortlisted but no interview)
