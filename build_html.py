@@ -43,6 +43,17 @@ DRAFTS = ROOT / "drafts"
 # across runs without an explicit standing instruction from Rah to do so.
 SHOW_SS_ENGINEERS_EXPERIENCE = True
 
+# ---- 26 August 2026 rule: Bachelor Thesis (Research and Thesis section) visibility switch ----
+# Governs ONLY the standalone "Research and Thesis" section (Project #9,
+# Diabetes Prediction Bachelor Thesis) across every render path (HTML/PDF,
+# docx; the standalone CV_Rahul_Rawat.md companion file never included this
+# section and is unaffected, same as the SS Engineers switch above). Default
+# is False (Bachelor Thesis section hidden) per Rah's 26 August 2026 live
+# instruction. Cowork must never change this switch on its own judgement and
+# must never leave it True across runs without an explicit standing
+# instruction from Rah to do so.
+SHOW_BACHELOR_THESIS = False
+
 # --- Palette --------------------------------------------------------------
 NAVY_HEX = "#1F3A5F"
 NAVY_GREY_HEX = "#6C7A93"
@@ -464,19 +475,22 @@ def html_cv(cfg):
             p.get("showcase"),
         )
 
-    # Research
-    research_title = (
-        "Bachelor Thesis, Diabetes Prediction Using Machine Learning"
-        if not is_de else "Bachelorarbeit: Diabetesvorhersage mit Machine Learning"
-    )
-    research_place = "Greater Noida, India"
-    research_html = _entry_html(
-        "2022 to 2023", research_place,
-        research_title,
-        "GL Bajaj Institute of Technology and Management, IEEE style paper",
-        cfg["research_bullets"],
-        ["Python", "scikit learn", "Pandas", "Seaborn"],
-    )
+    # Research, gated by SHOW_BACHELOR_THESIS (26 August 2026 rule, default False).
+    research_section_html = ""
+    if SHOW_BACHELOR_THESIS:
+        research_title = (
+            "Bachelor Thesis, Diabetes Prediction Using Machine Learning"
+            if not is_de else "Bachelorarbeit: Diabetesvorhersage mit Machine Learning"
+        )
+        research_place = "Greater Noida, India"
+        research_html = _entry_html(
+            "2022 to 2023", research_place,
+            research_title,
+            "GL Bajaj Institute of Technology and Management, IEEE style paper",
+            cfg["research_bullets"],
+            ["Python", "scikit learn", "Pandas", "Seaborn"],
+        )
+        research_section_html = f'<section class="section"><h2>{escape(hdr["research"])}</h2>{research_html}</section>'
 
     # Certifications, achievements
     certs_html = (
@@ -545,7 +559,7 @@ def html_cv(cfg):
 <section class="section section-long"><h2>{escape(hdr['experience'])}</h2>{exp_html}</section>
 <section class="section"><h2>{escape(hdr['education'])}</h2>{edu_html}</section>
 <section class="section section-long"><h2>{escape(hdr['projects'])}</h2>{proj_html}</section>
-<section class="section"><h2>{escape(hdr['research'])}</h2>{research_html}</section>
+{research_section_html}
 <section class="section"><h2>{escape(hdr['certifications'])}</h2>{certs_html}</section>
 <section class="section"><h2>{escape(hdr['achievements'])}</h2>{ach_html}</section>
 <section class="section"><h2>{escape(hdr['languages'])}</h2>{lang_html}</section>
@@ -881,19 +895,20 @@ def docx_cv(cfg, path):
             p.get("showcase"),
         )
 
-    # Research
-    _add_section_heading(doc, hdr["research"])
-    research_title = (
-        "Bachelor Thesis, Diabetes Prediction Using Machine Learning"
-        if not is_de else "Bachelorarbeit: Diabetesvorhersage mit Machine Learning"
-    )
-    _add_entry(
-        doc, "2022 to 2023", "Greater Noida, India",
-        research_title,
-        "GL Bajaj Institute of Technology and Management, IEEE style paper",
-        cfg["research_bullets"],
-        ["Python", "scikit learn", "Pandas", "Seaborn"],
-    )
+    # Research, gated by SHOW_BACHELOR_THESIS (26 August 2026 rule, default False).
+    if SHOW_BACHELOR_THESIS:
+        _add_section_heading(doc, hdr["research"])
+        research_title = (
+            "Bachelor Thesis, Diabetes Prediction Using Machine Learning"
+            if not is_de else "Bachelorarbeit: Diabetesvorhersage mit Machine Learning"
+        )
+        _add_entry(
+            doc, "2022 to 2023", "Greater Noida, India",
+            research_title,
+            "GL Bajaj Institute of Technology and Management, IEEE style paper",
+            cfg["research_bullets"],
+            ["Python", "scikit learn", "Pandas", "Seaborn"],
+        )
 
     # Certifications
     _add_section_heading(doc, hdr["certifications"])

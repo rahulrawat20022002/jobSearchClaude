@@ -26,7 +26,7 @@ Both agents pull the latest repo at run start. Only Cowork pushes. OpenClaw neve
 5. **Report exactly what happened.** Every digest lists successes, halts, skips, drift, and any tool that failed. Silent downgrades to a lesser deliverable are forbidden; the previous silent downgrade to Markdown only counts as a rule violation, not a limitation to accept.
 6. **Never send LinkedIn messages automatically.** Ever. LinkedIn's terms of service ban it and Rah's account is not disposable. OpenClaw pastes messages into the compose window and stops there. Cowork never opens a LinkedIn compose window at all.
 7. **Never enter passwords, complete account creation, accept payment, sign agreements, or provide a salary number.** This holds for both agents in every context.
-8. **Historical dated rules remain binding.** Rules referenced in past digests by date (28 July 2026 yield reset, 14 July 2026 status source of truth, 11 July 2026 reconciliation, 3 July 2026 v3 CV template, 4 August 2026 CV three-page hard cap (superseded by 19 August 2026 two page cap), 11 August 2026 CoverLetter PDF required, 12 July 2026 warm outreach, 20 July 2026 language match, 13 August 2026 auto-apply platform native and DataTransfer upload, 2 August 2026 SS Engineers two Experience entries, 18 July 2026 XYZ bullet format, 19 July 2026 Lebenslauf CV layout, 19 August 2026 CV content rules: no hyphens, no parentheses in bullets, Languages EN+DE only, German wording locked to "B1, in progress" / "B1, laufend", no page numbers/headers/footers, two page hard cap) still apply. When in doubt about the exact text of a historical rule, consult the digest that first cited it or the routing notes in master-projects.md.
+8. **Historical dated rules remain binding.** Rules referenced in past digests by date (28 July 2026 yield reset, 14 July 2026 status source of truth, 11 July 2026 reconciliation, 3 July 2026 v3 CV template, 4 August 2026 CV three-page hard cap (superseded by 19 August 2026 two page cap), 11 August 2026 CoverLetter PDF required, 12 July 2026 warm outreach, 20 July 2026 language match, 13 August 2026 auto-apply platform native and DataTransfer upload, 2 August 2026 SS Engineers two Experience entries, 18 July 2026 XYZ bullet format, 19 July 2026 Lebenslauf CV layout, 19 August 2026 CV content rules: no hyphens, no parentheses in bullets, Languages EN+DE only, German wording locked to "B1, in progress" / "B1, laufend", no page numbers/headers/footers, two page hard cap, 24 August 2026 SS Engineers visibility switch, 25 August 2026 JobTeaser search source, 26 August 2026 target roles narrowed to AI Engineer and AI Evaluation, 26 August 2026 Bachelor Thesis visibility switch default off) still apply. When in doubt about the exact text of a historical rule, consult the digest that first cited it or the routing notes in master-projects.md.
 
 ---
 
@@ -278,6 +278,62 @@ Every "applied" flag you write in Notion must be defensible under audit. If Rah 
 If anything at all feels off, the platform looks different from expected, a field asks something unusual, the submit button behaves strangely, a page structure has changed since the last run, HALT that role and report. Rah would rather review 10 halted roles than clean up 1 falsely-applied row.
 
 ---
+
+## 26 August 2026 rule: target roles narrowed to AI Engineer and AI Evaluation
+
+Rah gave this instruction live (not via the scheduled prompt), so it binds
+both agents going forward. Search targeting narrows from the previous
+broader list (Data Engineer, Data Analyst, Business Analyst, Data
+Scientist, AI/ML Engineer, Researcher, Master Thesis) to **AI Engineer and
+AI Evaluation only**.
+
+- **master-projects.md is the source of truth for the exact scope
+  wording** (Candidate targeting parameters section) — read it in full at
+  the start of every run per the standing step 1 instruction, do not rely
+  on a stale summary.
+- In scope: postings titled or scoped around AI Engineer, AI/ML Engineer,
+  Machine Learning Engineer, LLM Engineer, Agentic AI Engineer, AI
+  Evaluation Engineer, Applied AI or Model Evaluation, LLM-as-Judge or
+  eval-harness work, and Responsible AI Evaluation.
+- Out of scope as of this narrowing: plain Data Engineer, Data Analyst,
+  Business Analyst, Data Scientist, and general Researcher postings,
+  unless the posting itself reads squarely as an AI Engineer or AI
+  Evaluation role.
+- Master Thesis stays in scope as a **work type** (Masterarbeit /
+  Abschlussarbeit), not as a standalone role category — a Master Thesis
+  posting must still be AI Engineer or AI Evaluation flavored to qualify
+  under this rule.
+- This is a scope narrowing, not a data deletion: the historical
+  applied-log.csv and Notion rows for other role categories from before
+  26 August 2026 remain untouched and keep their existing Status.
+- Cowork must not widen scope back on its own judgement; only an explicit
+  instruction from Rah reopens the other role categories.
+
+## 26 August 2026 rule: Bachelor Thesis visibility switch
+
+Rah asked for an on/off switch for the standalone "Research and Thesis"
+section (Project #9, Bachelor Thesis — Diabetes Prediction Using Machine
+Learning) inside the CV, mirroring the existing SS Engineers switch below.
+
+The switch lives in `build_html.py` as the module level constant
+`SHOW_BACHELOR_THESIS`, gating the Research and Thesis section across both
+render paths that carry it (HTML/PDF and docx). The standalone
+`CV_Rahul_Rawat.md` companion file never included this section and is
+unaffected, same as the SS Engineers switch.
+
+- **Default is `False`** (Bachelor Thesis section hidden) per Rah's 26
+  August 2026 instruction, on every run including every future scheduled
+  Cowork run. Cowork must never change this switch on its own judgement
+  and must never leave it `True` across runs without an explicit standing
+  instruction from Rah to do so.
+- **To show again:** Rah tells Cowork explicitly to set
+  `SHOW_BACHELOR_THESIS = True` in `build_html.py`.
+- **To hide again** after a temporary show: Rah tells Cowork explicitly to
+  set it back to `False`.
+- Flipping the switch does not require touching any `role_configs_*.py`
+  file; `cfg["research_bullets"]` keeps working exactly as before
+  regardless of the switch's state, it is simply not rendered while the
+  switch is `False`.
 
 ## Notion schema (Job Applications database)
 

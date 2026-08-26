@@ -55,7 +55,19 @@
 
 ## Candidate targeting parameters
 
-- **Target roles:** Data Engineer, Data Analyst, Business Analyst, Data Scientist, AI/ML Engineer, Researcher, Master Thesis
+- **Target roles, 26 August 2026 narrowing:** AI Engineer, AI Evaluation only.
+  This replaces the previous broader list (Data Engineer, Data Analyst,
+  Business Analyst, Data Scientist, AI/ML Engineer, Researcher, Master
+  Thesis) per Rah's live instruction on 26 August 2026. In scope: postings
+  titled or scoped around AI Engineer, AI/ML Engineer, Machine Learning
+  Engineer, LLM Engineer, Agentic AI Engineer, AI Evaluation Engineer,
+  Applied AI or Model Evaluation, LLM-as-Judge or eval-harness work, and
+  Responsible AI Evaluation. Plain Data Engineer, Data Analyst, Business
+  Analyst, Data Scientist, and general Researcher postings are OUT of
+  scope unless the posting itself reads squarely as an AI Engineer or AI
+  Evaluation role. Master Thesis stays in scope as a work type (see Work
+  types below), not as a standalone role category — a Master Thesis
+  posting must still be AI Engineer or AI Evaluation flavored to qualify.
 - **Location:** anywhere in Germany; remote anywhere in EU
 - **Work types:** Werkstudent / part-time; mandatory internship only (Pflichtpraktikum required by the study programme); Master Thesis (Masterarbeit / Abschlussarbeit, actively searched as its own category). Full-time and Junior full roles stay out of scope.
 - **Pay:** not a filter. Include unpaid and low-paid roles, including unpaid mandatory internships. Do not rank or drop by compensation.
@@ -198,6 +210,13 @@
 **One-liner:** Published-grade ML study comparing 6 classifiers on a real clinical dataset; honest, leakage-aware evaluation.
 **Stack:** Python, Scikit-Learn, Pandas, Seaborn, Google Colab · IEEE-style paper
 **Best for:** Data Scientist, AI/ML Engineer
+> **26 August 2026 note:** Rendering of this project as the standalone
+> "Research and Thesis" section is now gated by the `SHOW_BACHELOR_THESIS`
+> switch in build_html.py, **default `False`** (hidden) per Rah's 26
+> August 2026 instruction. See CLAUDE.md's dated rule for how to flip it
+> back on. The routing note below (no render under Education, own
+> top-level section, full bullets verbatim) still describes how it renders
+> whenever the switch is `True`.
 
 - For a Bachelor thesis on diabetes prediction with a small clinical dataset of 768 patients, tasked with building a defensible model comparison the examiners could audit, built a full end to end machine learning pipeline comparing six classifiers with 10 fold cross validation and per model confusion matrices, delivering a model comparison that stood up in the thesis defence.
 - Spotting biologically impossible zero values in the source data that the original authors had overlooked, tasked with restoring data integrity before any model fit, applied IQR based outlier removal and proper imputation, which lifted the dataset from silently broken to a clean training input for every downstream model.
@@ -205,6 +224,13 @@
 - With the results needing to be publishable in substance rather than just submissible, tasked with writing them up formally, produced an IEEE style paper including an honest limitations section and what to do differently in a follow up study, which the supervisor accepted as publishable in substance.
 
 ---
+
+> **26 August 2026 scope note:** Active search targeting is AI Engineer and
+> AI Evaluation only (see Candidate targeting parameters above). The
+> role-to-project map below is retained as reference for tailoring within
+> AI Engineer / AI Evaluation postings and in case scope widens again;
+> the Data Engineer, Data Analyst, Business Analyst, and plain Data
+> Scientist rows are not currently used for search targeting.
 
 ## Quick role → project map (for fast scoring)
 
