@@ -359,3 +359,53 @@ Columns (both agents must respect exact names):
 - **LinkedIn Role** (text)
 - **LinkedIn Message** (text)
 - **Notes** (text)
+
+---
+
+## 2 September 2026 rule: conversion tracking (Rah-authored)
+
+Added by Rah after the Hirschmann Automation (Belden) Masterarbeit
+Agentic Pentesting role became the first application to convert to an
+interview (invite received 27 Aug 2026, interview 15 Sep 2026). The
+purpose of this rule is to learn from what converts WITHOUT over-fitting
+on a single data point.
+
+1. **Track outcomes past `applied`.** Whenever a row reaches `shortlisted`,
+   `shortlisted but no interview`, `interviewing`, or `offer`, record in
+   that row's Notion **Notes** the four conversion factors: (a) which CV
+   version/template was used (e.g. pre-19-Aug PD-block format vs. 19-Aug
+   Ojas-style format), (b) the projects selected on that CV, (c) the
+   language track (EN/DE), and (d) a one-line read on role-fit (how
+   closely the posting matched Rah's actual project stack). OpenClaw may
+   write these Notes on status flips; Cowork may add them during
+   reconciliation when it observes a converted row missing the detail.
+
+2. **A single conversion is signal, never proof.** Do not change the CV
+   template, project-selection logic, or search targeting on the strength
+   of one shortlist or interview. In particular, do not claim "our
+   structure passes ATS" from one conversion — layout gets a CV parsed;
+   content and role-fit get it picked, and those are confounded in any
+   single win.
+
+3. **Review only at N>=3 to 5 conversions.** Once at least 3 to 5 rows
+   have converted, review their recorded factors together for a genuine
+   shared pattern (common structure, project mix, language track, or
+   fit signal) before treating anything as a repeatable cause. Rah makes
+   the call on what, if anything, becomes a standing rule from that
+   review.
+
+4. **Keep the ATS baseline regardless.** Independent of conversion data,
+   every CV stays ATS-parseable as a standing hygiene baseline: single
+   column, standard section headings, real selectable text (never an
+   image-only or table-maze layout), consistent date formats. This is a
+   floor, not a claim about what causes conversions.
+
+5. **First tracked data point:** Hirschmann Automation and Control GmbH
+   (Belden), Masterarbeit Agentic Pentesting, Neckartenzlingen. CV
+   version: pre-19-Aug-2026 format (PERSOENLICHE DATEN block, Hindi,
+   "B1 laufend Richtung B2"). Projects on CV: Multi-Agent RAG only as a
+   project card, with Hybrid RAG Orchestrator and CreditIQ referenced in
+   the profile line and cover letter. Language track: DE. Role-fit:
+   extremely high (agentic AI + evaluation + a GuardrailsAgent doing
+   prompt-injection defence, matching an agentic-pentesting thesis almost
+   one to one). Source: StepStone. Interview: 15 Sep 2026, team panel.
